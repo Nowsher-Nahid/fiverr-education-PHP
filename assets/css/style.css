@@ -1,0 +1,120 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    margin: 0;
+    padding-top: 56px;
+	/*background-color: #156082;
+	padding-top: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	height: 100vh;*/
+}
+.navbar {
+  	background-color: #003554; /* Dark background color */
+}
+.navbar-brand {
+  	padding: 0;
+}
+.navbar-brand img {
+  max-height: 100%;
+}
+.navbar-nav .nav-link {
+  color: #fff; /* White text color */
+  margin-right: 15px; /* Increased space between menu items */
+}
+#user-name {
+  color: #fff;
+  margin-right: 20px; /* Adjust as needed */
+}
+.form-container {
+  background-color: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+/*  max-width: 900px;*/
+/*  margin: auto;*/
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.step {
+  display: none;
+}
+.step.active {
+  display: block;
+}
+.selected-options {
+  margin-top: 20px;
+}
+.remove-option-btn {
+  cursor: pointer;
+}
+
+.form-control, 
+.btn {
+	border-radius: 0px;
+}
+.btn-primary {
+	background: #156082;
+	border-color: #156082;
+}
+.btn-primary:hover {
+	background: #216e91;
+	border-color: #216e91;
+}
+.prev, .next, .submit {
+	margin-top: 50px;
+}
+#selectedOptionsList li {
+	margin-bottom: 10px;
+}
+*:focus {
+    box-shadow: none !important;
+    border-color: #156082 !important;
+}
+#user-name {
+    color: #fff;
+    margin-right: 20px; /* Adjust as needed */
+}
+#user-image {
+    border-radius: 50%;
+    max-height: 40px; /* Adjust as needed */
+    margin-right: 20px; /* Adjust as needed */
+}
+
+/*responsive*/
+@media only screen and (min-width: 768px){
+	.both-btn .prev, 
+	.both-btn .next,
+	.both-btn .submit {
+		width: 25%!important;
+	}
+  .further-person button {
+    width: 20%;
+  }
+  /* .ls-ml-10 {
+    margin-left: 10px;
+  }
+  #taskList th, #taskList td {
+    text-align: center;
+  } */
+}
+@media only screen and (max-width: 768px){
+  ul.navbar-nav.ml-auto {
+    position: relative;
+  }
+  img#user-image {
+    float: right;
+    position: absolute;
+    max-height: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -20px;
+  }
+  .actionBtn {
+    width: 50%;
+  }
+  /* .m-ml-5 {
+    margin-left: 5px;
+  } */
+}
