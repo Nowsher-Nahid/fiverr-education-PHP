@@ -152,7 +152,7 @@
 
 	          <!-- Step 2 -->
 	          <div class="step" data-step="2">
-	            <h2>Step 2</h2>
+	            <h2 class="mb-4">Step 2</h2>
 				<div class="form-group">
 		            <label for="selectedOption">Teacher</label>
 		            <select class="form-control" id="selectedOption">
@@ -190,7 +190,7 @@
 
 	          <!-- Step 3 -->
 	          <div class="step" data-step="3">
-	            <h2>Step 3</h2>
+	            <h2 class="mb-4">Step 3</h2>
 	            <div class="form-group">
 		            <label for="selectedArea">School Area</label>
 		            <select class="form-control" id="selectedArea">
@@ -235,7 +235,7 @@
 
 	          <!-- Step 4 -->
 	          <div class="step" data-step="4">
-	            <h2>Step 4</h2>
+	            <h2 class="mb-4">Step 4</h2>
 	            <div class="form-group">
 	              <label for="field4">Field 4:</label>
 	              <input type="text" class="form-control" id="field4" name="field4" required>
@@ -254,16 +254,69 @@
 
 	          <!-- Step 5 -->
 	          <div class="step" data-step="5">
-	            <h2>Step 5</h2>
-	            <div class="form-group">
-	              <label for="field5">Field 5:</label>
-	              <input type="text" class="form-control" id="field5" name="field5" required>
-	            </div>
-	            <div class="form-group">
-	              <label for="textarea5">Textarea 5:</label>
-	              <textarea class="form-control" id="textarea5" name="textarea5" rows="3" required></textarea>
-	            </div>
-	            <div class="text-center both-btn">
+	            <h2 class="mb-4">Step 5</h2>
+				<form id="taskForm">
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="taskEntry" id="selectTask" value="select" checked>
+							<label class="form-check-label" for="selectTask">Tasks list</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="taskEntry" id="manualEntry" value="manual">
+							<label class="form-check-label" for="manualEntry">Free task entry</label>
+						</div>
+					</div>
+
+					<div class="form-group" id="selectTaskGroup">
+						<label for="taskSelect">Tasks</label>
+						<select class="form-control" id="taskSelect" required>
+							<option value="">Select task</option>
+							<?php 
+							$get_tasks = $crudObj->dynamic_query('SELECT * FROM vd_task ORDER BY task');
+							foreach($get_tasks as $task){
+							?>
+							<option value="<?php echo $task['task'] ?>"><?php echo $task['task'] ?></option>
+							<?php } ?>
+						</select>
+					</div>
+
+					<div class="form-group" id="manualTaskGroup" style="display: none;">
+						<label for="manualTask">Enter further task</label>
+						<input type="text" class="form-control" id="manualTask" placeholder="Enter task manually">
+					</div>
+
+					<div class="form-group">
+						<label for="userSelect">Teachers</label>
+						<select class="form-control" id="userSelect" required>
+							<option value="">Select teacher</option>
+							<?php 
+							$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
+							foreach($get_teachers as $teacher){
+							$full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+							?>
+							<option value="<?php echo str_replace(' ', '__', $full_name) ?>"><?php echo $full_name ?></option>
+							<?php } ?>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="deadline">Select Deadline:</label>
+						<input type="date" class="form-control" id="deadline" required>
+					</div>
+					<div class="mt-4 mb-5">
+						<button type="button" class="btn btn-primary btn-block" onclick="assignTask()">Assign Task</button>
+					</div>
+					
+				</form>
+
+				<div class="mt-4">
+					<h3 class="text-center mb-4">Assigned Tasks</h3>
+					<div id="assignedTasks">
+					<!-- Tasks will be displayed here -->
+					</div>
+				</div>
+
+				<div class="text-center both-btn">
 	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
 	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
 	            </div>
@@ -273,7 +326,7 @@
 
 	          <!-- Step 6 -->
 	          <div class="step" data-step="6">
-	            <h2>Step 6</h2>
+	            <h2 class="mb-4">Step 6</h2>
 	            <div class="form-group">
 		            <label for="selectedGoal">Select aimed goals</label>
 		            <select class="form-control" id="selectedGoal">
@@ -308,9 +361,9 @@
 
 	          <!-- Step 7 -->
 	          <div class="step" data-step="7">
-	            <h2>Step 7</h2>
-	            <div class="form-group">
-		            <label for="selectedAction">Select actions</label>
+	            <h2 class="mb-4">Step 7</h2>
+				<div class="form-group">
+		            <label for="selectedGoal">Actions</label>
 		            <select class="form-control" id="selectedAction">
 						<option value="">Select action</option>
 						<?php 
@@ -383,3 +436,4 @@
       	});
    	})
 </script>
+

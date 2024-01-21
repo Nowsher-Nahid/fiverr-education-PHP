@@ -3,140 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Task Manager</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Datepicker CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-  <!-- Bootstrap Select CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Add Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <title>Task Assignment Form</title>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-top: 50px;
+    }
+
+    h2, h3, h4 {
+      color: #007bff;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .user-box {
+      background-color: #f8f9fa;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .task-box {
+      background-color: #ffffff;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-btn {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .user-image {
+      width: 50px; /* Adjust the width as needed */
+      height: 50px; /* Adjust the height as needed */
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Task Manager</h2>
-
-      <!-- Dropdown for pre-defined tasks using select tag -->
-      <div class="form-group">
-        <label for="taskDropdown">Select a Task:</label>
-        <select class="form-control" id="taskDropdown" onchange="addTaskFromDropdown()">
-          <option value="Task 1">Task 1</option>
-          <option value="Task 2">Task 2</option>
-          <option value="Task 3">Task 3</option>
-        </select>
+<div class="container">
+  <h2 class="text-center mb-4">Task Assignment</h2>
+  <form id="taskForm">
+    <div class="form-group">
+      <label>Task Entry:</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="taskEntry" id="selectTask" value="select" checked>
+        <label class="form-check-label" for="selectTask">Select Task</label>
       </div>
-
-      <!-- Input field for manual task addition -->
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" id="manualTaskInput" placeholder="Enter a task">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" onclick="addManualTask()">Add</button>
-        </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="taskEntry" id="manualEntry" value="manual">
+        <label class="form-check-label" for="manualEntry">Manual Entry</label>
       </div>
+    </div>
 
-      <!-- List to display tasks -->
-      <ul class="list-group" id="taskList">
-        <!-- Tasks will be added here -->
-      </ul>
+    <div class="form-group" id="selectTaskGroup">
+      <label for="taskSelect">Select Task:</label>
+      <select class="form-control" id="taskSelect" required>
+        <option value="task1">Task 1</option>
+        <option value="task2">Task 2</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="manualTaskGroup" style="display: none;">
+      <label for="manualTask">Manual Entry:</label>
+      <input type="text" class="form-control" id="manualTask" placeholder="Enter task manually">
+    </div>
+
+    <div class="form-group">
+      <label for="userSelect">Select User:</label>
+      <select class="form-control" id="userSelect" required>
+        <option value="user1">User 1</option>
+        <option value="user2">User 2</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="deadline">Select Deadline:</label>
+      <input type="date" class="form-control" id="deadline" required>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-block" onclick="assignTask()">Assign Task</button>
+  </form>
+
+  <div class="mt-4">
+    <h3 class="text-center mb-4">Assigned Tasks</h3>
+    <div id="assignedTasks">
+      <!-- Tasks will be displayed here -->
     </div>
   </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-<!-- Bootstrap Datepicker JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<!-- Bootstrap Select JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/i18n/defaults-en_US.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-  // Initialize Bootstrap Datepicker
-  $(document).ready(function(){
-    $('#deadline').datepicker({
-      format: 'yyyy-mm-dd',
-      autoclose: true
+  // Clear local storage on page load
+  localStorage.clear();
+
+  $(document).ready(function() {
+    // Load existing tasks from local storage
+    loadTasks();
+
+    $('input[name="taskEntry"]').change(function() {
+      if ($('#manualEntry').is(':checked')) {
+        $('#selectTaskGroup').hide();
+        $('#manualTaskGroup').show();
+      } else {
+        $('#selectTaskGroup').show();
+        $('#manualTaskGroup').hide();
+      }
     });
   });
 
-  // Function to add tasks from dropdown to the list
-  function addTaskFromDropdown() {
-    var taskDropdown = document.getElementById('taskDropdown');
-    var selectedTask = taskDropdown.value;
-    addTask(selectedTask);
+  function assignTask() {
+    var user = $('#userSelect').val();
+    var task = ($('#manualEntry').is(':checked')) ? $('#manualTask').val() : $('#taskSelect').val();
+    var deadline = $('#deadline').val();
+
+    if (deadline === "") {
+      alert('Please select a deadline.');
+      return;
+    }
+
+    // Check for existing tasks for the user
+    var existingTasks = getTasks(user);
+
+    // Check if the task is already assigned
+    if (existingTasks.includes(task)) {
+      alert('Task already assigned to the user.');
+      return;
+    }
+
+    // Save the task to local storage
+    existingTasks.push(task);
+    saveTasks(user, existingTasks);
+
+    // Display the assigned task
+    displayAssignedTask(user, task, deadline);
+
+    // Show alert for successful task assignment
+    showAlert('Task assigned successfully!');
   }
 
-  // Function to add manually entered tasks to the list
-  function addManualTask() {
-    var manualTaskInput = document.getElementById('manualTaskInput');
-    var task = manualTaskInput.value.trim();
-    if (task !== '') {
-      if (!isTaskDuplicate(task)) {
-        addTask(task);
-        manualTaskInput.value = ''; // Clear the input field
-      } else {
-        alert('Task already exists!');
-      }
+  function showAlert(message) {
+    var alertDiv = $('<div>').addClass('alert alert-success mt-3').text(message);
+    $('.container').prepend(alertDiv);
+
+    // Remove the alert after 3 seconds
+    setTimeout(function() {
+      alertDiv.remove();
+    }, 3000);
+  }
+
+  function saveTasks(user, tasks) {
+    localStorage.setItem(user, JSON.stringify(tasks));
+  }
+
+  function getTasks(user) {
+    var tasks = localStorage.getItem(user);
+    return tasks ? JSON.parse(tasks) : [];
+  }
+
+  function loadTasks() {
+    // Do not load tasks on page load
+  }
+
+  function displayAssignedTask(user, task, deadline) {
+    // Check if the user has already been displayed
+    var userDiv = $('#user-' + user);
+
+    if (userDiv.length) {
+      // User already displayed, append the new task
+      var taskElement = $('<div>').addClass('task-box').text(task + ' (Deadline: ' + deadline + ')');
+      var removeButton = $('<button>').text('Remove').addClass('btn btn-danger btn-sm remove-btn').click(function() {
+        removeTask(user, task);
+        taskElement.remove();
+        checkAndRemoveUserSection(user);
+      });
+      taskElement.append(removeButton);
+      userDiv.find('.tasks-container').append(taskElement);
+    } else {
+      // User not displayed, create a new user entry
+      displayUserTasks(user, [task], deadline);
     }
   }
 
-  // Function to add tasks to the list
-  function addTask(task) {
-    if (!isTaskDuplicate(task)) {
-      var taskList = document.getElementById('taskList');
-      var listItem = document.createElement('li');
-      listItem.className = 'list-group-item';
-      listItem.textContent = task;
+  function displayUserTasks(user, tasks, deadline) {
+    var assignedTasksDiv = $('#assignedTasks');
+    var userDiv = $('<div>').attr('id', 'user-' + user).addClass('user-box row');
+    var userCol = $('<div>').addClass('col-md-2 my-auto');
+    var userImage = $('<img>').attr('src', 'path/to/user-image.jpg').addClass('user-image');
+    var userName = $('<h4>').text(user).addClass('text-dark mt-2');
+    var tasksContainer = $('<div>').addClass('tasks-container col-md-10');
 
-      // Create a div for calendar and user dropdown
-      var taskOptions = document.createElement('div');
-      taskOptions.className = 'd-flex justify-content-between align-items-center';
+    userCol.append(userImage);
+    userCol.append(userName);
 
-      // Deadline calendar
-      var deadlineInput = document.createElement('input');
-      deadlineInput.type = 'text';
-      deadlineInput.className = 'form-control';
-      deadlineInput.placeholder = 'Select a deadline';
-      deadlineInput.setAttribute('data-provide', 'datepicker');
-      deadlineInput.setAttribute('data-date-format', 'yyyy-mm-dd');
-      deadlineInput.setAttribute('data-date-autoclose', 'true');
-      taskOptions.appendChild(deadlineInput);
+    tasks.forEach(function(task) {
+      var taskElement = $('<div>').addClass('task-box').text(task + ' (Deadline: ' + deadline + ')');
+      var removeButton = $('<button>').text('Remove').addClass('btn btn-danger btn-sm remove-btn').click(function() {
+        removeTask(user, task);
+        taskElement.remove();
+        checkAndRemoveUserSection(user);
+      });
+      taskElement.append(removeButton);
+      tasksContainer.append(taskElement);
+    });
 
-      // Assign task to users using Bootstrap Select
-      var assigneeSelect = document.createElement('select');
-      assigneeSelect.className = 'form-control selectpicker ml-2';
-      assigneeSelect.setAttribute('data-live-search', 'true');
-      var users = ['User 1', 'User 2', 'User 3'];
-      for (var i = 0; i < users.length; i++) {
-        var option = document.createElement('option');
-        option.value = 'user' + (i + 1);
-        option.textContent = users[i];
-        assigneeSelect.appendChild(option);
-      }
-      taskOptions.appendChild(assigneeSelect);
-
-      listItem.appendChild(taskOptions);
-
-      taskList.appendChild(listItem);
-
-      // Initialize Bootstrap Select for the new task
-      $('.selectpicker').selectpicker('refresh');
-    }
+    userDiv.append(userCol, tasksContainer);
+    assignedTasksDiv.append(userDiv);
   }
 
-  // Function to check if a task already exists in the list
-  function isTaskDuplicate(task) {
-    var taskListItems = document.querySelectorAll('#taskList li');
-    for (var i = 0; i < taskListItems.length; i++) {
-      if (taskListItems[i].textContent === task) {
-        return true;
-      }
+  function removeTask(user, task) {
+    var existingTasks = getTasks(user);
+    var updatedTasks = existingTasks.filter(function(existingTask) {
+      return existingTask !== task;
+    });
+    saveTasks(user, updatedTasks);
+  }
+
+  function checkAndRemoveUserSection(user) {
+    var userDiv = $('#user-' + user);
+    if (userDiv.find('.tasks-container').children('.task-box').length === 0) {
+      // If the user has no tasks, remove the entire user section
+      userDiv.remove();
     }
-    return false;
   }
 </script>
 
