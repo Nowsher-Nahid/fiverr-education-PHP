@@ -1,5 +1,7 @@
-<?php include('includes/header.php') ?>
-<?php include('includes/navbar.php') ?>
+<?php 
+include('includes/header.php');
+include('includes/navbar.php');
+?>
 
 	<div class="container">
 	  <div class="row justify-content-center">
@@ -33,111 +35,24 @@
 			            </div>
 			           </div>
 			         </div>
-			         <div class="row">
-			         	<div class="col-md-12 mt-3 mb-5">
-			         		<img src="assets/img/avatar.png" alt="Image" width="150">
+			         <div class="">
+			         	<div class="student-image mt-3 mb-5">
+			         		<img class="boy-avatar d-none" src="assets/img/avatar.png" alt="Image" width="150">
+			         		<img class="girl-avatar d-none" src="assets/img/avatar-girl.jpg" alt="Image" width="150">
 			         	</div>
-			         	<div class="col-md-12 table-responsive">
-			         		<table id="example" class="table table-striped" style="width:100%">
+						<h3 class="text-center my-4">Test Data</h3>
+						<h3 class="text-center text-danger na-text">No data available! Please select a class and a student.</h3>
+						<h3 class="text-center text-danger no-data-text d-none">Sorry, No data available for this student!</h3>
+			         	<div class="table-responsive table-section d-none">
+			         		<table id="" class="table table-bordered" style="width:100%">
 						        <thead>
 						            <tr>
 						                <th>Area</th>
-						                <th>Tests</th>
-						                <th>Scores</th>
-						                <th>Remarks</th>
+						                <th>Score</th>
 						            </tr>
 						        </thead>
-						        <tbody>
-						            <tr>
-						                <td>Tiger Nixon</td>
-						                <td>System Architect</td>
-						                <td>61</td>
-						                <td>2011-04-25</td>
-						            </tr>
-						            <tr>
-						                <td>Hope Fuentes</td>
-						                <td>San Francisco</td>
-						                <td>41</td>
-						                <td>2010-02-12</td>
-						            </tr>
-						            <tr>
-						                <td>Financial Controller</td>
-						                <td>San Francisco</td>
-						                <td>62</td>
-						                <td>2009-02-14</td>
-						            </tr>
-						            <tr>
-						                <td>Office Manager</td>
-						                <td>London</td>
-						                <td>37</td>
-						                <td>2008-12-11</td>
-						            </tr>
-						            <tr>
-						                <td>Director</td>
-						                <td>New York</td>
-						                <td>65</td>
-						                <td>2008-09-26</td>
-						            </tr>
-						            <tr>
-						                <td>Tiger Nixon</td>
-						                <td>System Architect</td>
-						                <td>61</td>
-						                <td>2011-04-25</td>
-						            </tr>
-						            <tr>
-						                <td>Hope Fuentes</td>
-						                <td>San Francisco</td>
-						                <td>41</td>
-						                <td>2010-02-12</td>
-						            </tr>
-						            <tr>
-						                <td>Financial Controller</td>
-						                <td>San Francisco</td>
-						                <td>62</td>
-						                <td>2009-02-14</td>
-						            </tr>
-						            <tr>
-						                <td>Office Manager</td>
-						                <td>London</td>
-						                <td>37</td>
-						                <td>2008-12-11</td>
-						            </tr>
-						            <tr>
-						                <td>Director</td>
-						                <td>New York</td>
-						                <td>65</td>
-						                <td>2008-09-26</td>
-						            </tr>
-						            <tr>
-						                <td>Tiger Nixon</td>
-						                <td>System Architect</td>
-						                <td>61</td>
-						                <td>2011-04-25</td>
-						            </tr>
-						            <tr>
-						                <td>Hope Fuentes</td>
-						                <td>San Francisco</td>
-						                <td>41</td>
-						                <td>2010-02-12</td>
-						            </tr>
-						            <tr>
-						                <td>Financial Controller</td>
-						                <td>San Francisco</td>
-						                <td>62</td>
-						                <td>2009-02-14</td>
-						            </tr>
-						            <tr>
-						                <td>Office Manager</td>
-						                <td>London</td>
-						                <td>37</td>
-						                <td>2008-12-11</td>
-						            </tr>
-						            <tr>
-						                <td>Director</td>
-						                <td>New York</td>
-						                <td>65</td>
-						                <td>2008-09-26</td>
-						            </tr>
+						        <tbody class="table-body">
+									
 						        </tbody>
 						        
 						    </table>
@@ -421,7 +336,7 @@
 <?php include('includes/footer.php') ?>
 
 <script>
-	// on change classes show students 
+	// STEP 1 : on change classes show students 
 	$('#class').change(function(){
       	var selectedClass = $(this).val();
       	$.ajax({
@@ -432,6 +347,41 @@
          	cache: false,
          	success: function(data) {
 				$('#student').html(data);
+         	}
+      	});
+   	})
+
+	// STEP 1 : on change students show student data in the table 
+	$('.na-text').show();
+	$('#student').change(function(){
+      	var selectedStudent = $(this).val();
+      	$.ajax({
+         	url: "actions/action-forms.php",
+         	method: "POST",
+         	data: {selectedStudent:selectedStudent},
+         	crossDomain: true,
+         	cache: false,
+         	success: function(data) {
+				var info = data.split("#");
+				// show male or female avatar
+				if(info[0] == 'm'){
+    				$(".boy-avatar").removeClass("d-none");
+    				$(".girl-avatar").addClass("d-none");
+				}else{
+					$(".boy-avatar").addClass("d-none");
+					$(".girl-avatar").removeClass("d-none");
+				}
+				// set data into the table
+				if(info[1] != ''){
+					$('.table-body').html(info[1]);
+					$(".table-section").removeClass("d-none");
+					$('.na-text').hide();
+					$(".no-data-text").addClass("d-none");
+				}else{
+					$(".table-section").addClass("d-none");
+					$('.na-text').hide();
+					$(".no-data-text").removeClass("d-none");
+				}
          	}
       	});
    	})
