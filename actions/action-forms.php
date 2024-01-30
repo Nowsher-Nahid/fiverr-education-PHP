@@ -21,11 +21,11 @@ if(isset($_POST['selectedStudent']) && $_POST["selectedStudent"]!="" ){
     $studentID_and_gender = explode("#",$_POST['selectedStudent']);
     $studentID = $studentID_and_gender[0];
     $studentGender = $studentID_and_gender[1];
-    $get_areas = $crudObj->dynamic_query('SELECT vd_test_idx_fb,vd_test_idx_file FROM vd_test_idx');
+    $get_data = $crudObj->dynamic_query('SELECT vd_test_idx_fb,vd_test_idx_file,vd_test_idx_name FROM vd_test_idx');
     $dataTableRow = '';
-    $counter = 0;
-    foreach($get_areas as $data){
+    foreach($get_data as $data){
         $area = $data['vd_test_idx_fb'];
+        $test = $data['vd_test_idx_name'];
         $prefix = $data['vd_test_idx_file'];
         $table = 'vd_tb_'.$prefix;
 
@@ -36,7 +36,7 @@ if(isset($_POST['selectedStudent']) && $_POST["selectedStudent"]!="" ){
             $columnName = $columnPrefix.'_tst_gw';
             $get_marks = $crudObj->dynamic_query('SELECT '.$columnName.' FROM '.$table.' WHERE ID_pupil = "'.$studentID.'" ');
             $mark = $get_marks[0][0];
-            $dataTableRow .= '<tr><td>'.$area.'</td><td>'.$mark.'</td></tr>';
+            $dataTableRow .= '<tr><td>'.$area.'</td><td>'.$test.'</td><td>'.$mark.'</td></tr>';
         }
     }
     echo $studentGender.'#'.$dataTableRow;

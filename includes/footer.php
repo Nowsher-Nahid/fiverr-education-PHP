@@ -11,9 +11,11 @@
 <script src="assets/js/step.js"></script>
 <script src="assets/js/teacher.js"></script>
 <script src="assets/js/area.js"></script>
+<script src="assets/js/student.js"></script>
 <script src="assets/js/goal.js"></script>
 <script src="assets/js/action.js"></script>
 <script src="assets/js/task-asignment.js"></script>
+<script src="assets/js/report.js"></script>
 
 </body>
 </html>

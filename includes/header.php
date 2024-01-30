@@ -3,6 +3,10 @@ require_once('controller/crudFunctions.php');
 $crudObj = new CrudOparation;
 
 $user_id = 4;
+$where_user = array('ID'=>$user_id);
+$get_user = $crudObj->select_record('vd_user_sex,vd_user_1_name,vd_user_2_name',$where_user,'vd_user');
+$full_name = $get_user[0]['vd_user_1_name'].' '.$get_user[0]['vd_user_2_name'];
+$user_gender = $get_user[0]['vd_user_sex'];
 
 // if(isset($_SESSION['user_email']) && $_SESSION['user_type']=="Admin") {
 // 	$user_id = $_SESSION['user_id'];
@@ -35,7 +39,6 @@ $user_id = 4;
 	<link rel="stylesheet" href="assets/vendor/sweetalert2/sweetalert2.min.css">
   <!-- theme css -->
   <link rel="stylesheet" href="assets/css/style.css">
-  
 
 </head>
 <body>

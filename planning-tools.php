@@ -2,7 +2,6 @@
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
-
 	<div class="container">
 	  <div class="row justify-content-center">
 	    <div class="col-md-12">
@@ -10,7 +9,7 @@ include('includes/navbar.php');
 	        <form id="multiStepForm">
 	          <!-- Step 1 -->
 	          <div class="step active" data-step="1">
-	            <h2 class="mb-4">Step 1</h2>
+	            <h2 class="mb-4">Step 1 : Student Information</h2>
 
 	            <div class="row">
 	            	<div class="col-md-6">
@@ -44,14 +43,15 @@ include('includes/navbar.php');
 						<h3 class="text-center text-danger na-text">No data available! Please select a class and a student.</h3>
 						<h3 class="text-center text-danger no-data-text d-none">Sorry, No data available for this student!</h3>
 			         	<div class="table-responsive table-section d-none">
-			         		<table id="" class="table table-bordered" style="width:100%">
+			         		<table id="studentTable" class="table table-bordered" style="width:100%">
 						        <thead>
 						            <tr>
 						                <th>Area</th>
+						                <th>Test</th>
 						                <th>Score</th>
 						            </tr>
 						        </thead>
-						        <tbody class="table-body">
+						        <tbody class="table-body-section">
 									
 						        </tbody>
 						        
@@ -67,7 +67,7 @@ include('includes/navbar.php');
 
 	          <!-- Step 2 -->
 	          <div class="step" data-step="2">
-	            <h2 class="mb-4">Step 2</h2>
+	            <h2 class="mb-4">Step 2 : Teachers</h2>
 				<div class="form-group">
 		            <label for="selectedOption">Teacher</label>
 		            <select class="form-control" id="selectedOption">
@@ -75,9 +75,9 @@ include('includes/navbar.php');
 						<?php 
 						$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
 						foreach($get_teachers as $teacher){
-						$full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+						$teacher_full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
 						?>
-						<option value="<?php echo $full_name ?>"><?php echo $full_name ?></option>
+						<option value="<?php echo $teacher_full_name ?>"><?php echo $teacher_full_name ?></option>
 						<?php } ?>
 
 		            </select>
@@ -90,7 +90,7 @@ include('includes/navbar.php');
 				  </div>
 	            </div>
 	            
-		         <!-- Selected Options Section -->
+		        <!-- Selected Options Section -->
 		        <div class="selected-options">
 		          <h3>Selected persons:</h3>
 		          <ul id="selectedOptionsList"></ul>
@@ -105,7 +105,7 @@ include('includes/navbar.php');
 
 	          <!-- Step 3 -->
 	          <div class="step" data-step="3">
-	            <h2 class="mb-4">Step 3</h2>
+	            <h2 class="mb-4">Step 3 : School Area</h2>
 	            <div class="form-group">
 		            <label for="selectedArea">School Area</label>
 		            <select class="form-control" id="selectedArea">
@@ -142,7 +142,7 @@ include('includes/navbar.php');
 		        </div>
 	            <div class="text-center both-btn">
 	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 next-three">Next Step</button>
 	            </div>
 	          </div>
 
@@ -150,15 +150,33 @@ include('includes/navbar.php');
 
 	          <!-- Step 4 -->
 	          <div class="step" data-step="4">
-	            <h2 class="mb-4">Step 4</h2>
+	            <h2 class="mb-4">Step 4 : Student Details</h2>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-6">
+							<label for="">Selected student</label>
+							<input type="text" class="form-control selected-student" readonly>
+						</div>
+						<div class="col-md-6">
+							<label for="">Selected school area</label>
+							<input type="text" class="form-control selected-area" readonly>
+						</div>
+					</div>
+					
+				</div>
 	            <div class="form-group">
-	              <label for="field4">Field 4:</label>
-	              <input type="text" class="form-control" id="field4" name="field4" required>
-	            </div>
-	            <div class="form-group">
-	              <label for="textarea4">Textarea 4:</label>
-	              <textarea class="form-control" id="textarea4" name="textarea4" rows="3" required></textarea>
-	            </div>
+		            <label for="selectedTestData">School relevant test data</label>
+		            <select class="form-control" id="selectedTestData">
+						
+		            </select>
+		        </div>
+
+				<!-- Selected Options Section -->
+		        <div class="selected-options">
+		          <h3>Selected test data:</h3>
+		          <ul id="selectedTestsList"></ul>
+		        </div>
+
 	            <div class="text-center both-btn">
 	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
 	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
@@ -169,7 +187,7 @@ include('includes/navbar.php');
 
 	          <!-- Step 5 -->
 	          <div class="step" data-step="5">
-	            <h2 class="mb-4">Step 5</h2>
+	            <h2 class="mb-4">Step 5 : Task Assignment</h2>
 				<form id="taskForm">
 					<div class="form-group">
 						<div class="form-check form-check-inline">
@@ -207,9 +225,11 @@ include('includes/navbar.php');
 							<?php 
 							$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
 							foreach($get_teachers as $teacher){
-							$full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+								$user_gender = $teacher['vd_user_sex'];
+								$full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+								$full_name_class = str_replace(' ', '__', $full_name).'__'.$user_gender;
 							?>
-							<option value="<?php echo str_replace(' ', '__', $full_name) ?>"><?php echo $full_name ?></option>
+							<option value="<?php echo $full_name_class ?>"><?php echo $full_name ?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -226,7 +246,7 @@ include('includes/navbar.php');
 
 				<div class="mt-4">
 					<h3 class="text-center mb-4">Assigned Tasks</h3>
-					<div id="assignedTasks">
+					<div id="assignedTasks" class="assignedTasks">
 					<!-- Tasks will be displayed here -->
 					</div>
 				</div>
@@ -241,7 +261,7 @@ include('includes/navbar.php');
 
 	          <!-- Step 6 -->
 	          <div class="step" data-step="6">
-	            <h2 class="mb-4">Step 6</h2>
+	            <h2 class="mb-4">Step 6 : Goals</h2>
 	            <div class="form-group">
 		            <label for="selectedGoal">Select aimed goals</label>
 		            <select class="form-control" id="selectedGoal">
@@ -276,7 +296,7 @@ include('includes/navbar.php');
 
 	          <!-- Step 7 -->
 	          <div class="step" data-step="7">
-	            <h2 class="mb-4">Step 7</h2>
+	            <h2 class="mb-4">Step 7 : Actions</h2>
 				<div class="form-group">
 		            <label for="selectedGoal">Actions</label>
 		            <select class="form-control" id="selectedAction">
@@ -305,25 +325,95 @@ include('includes/navbar.php');
 		        </div>
 		        <div class="text-center both-btn">
 	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 next-seven">Next Step</button>
 	            </div>
 	          </div>
 
 	          <!-- Step 8 -->
 	          <div class="step" data-step="8">
-	            <h2>Step 8</h2>
-	            <div class="form-group">
-	              <label for="field8">Field 8:</label>
-	              <input type="text" class="form-control" id="field8" name="field8" required>
-	            </div>
-	            <div class="form-group">
-	              <label for="textarea8">Textarea 8:</label>
-	              <textarea class="form-control" id="textarea8" name="textarea8" rows="3" required></textarea>
-	            </div>
+	            <h2><span class="no-print">Step 8 : </span>Report / Summary</h2>
+				<div class="image-container">
+					<div class="user-info">
+						<img src="" width="80" class="rounded-circle eight-student-image" alt="">
+						<h5 class="mt-2 eight-student-name"></h5>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<h4 class="mb-3">Student Information :</h4>
+					<div class="table-responsive table-section">
+						<table id="studentTable" class="table table-bordered" style="width:100%">
+							<thead>
+								<tr>
+									<th>Area</th>
+									<th>Test</th>
+									<th>Score</th>
+								</tr>
+							</thead>
+							<tbody class="table-body-section">
+								
+							</tbody>
+							
+						</table>
+					</div>
+				</div>
 
-	            <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="submit" class="btn btn-success submit ml-2">Submit</button>
+				<div class="form-group">
+					<h4 class="mb-3">Task Assignments :</h4>
+					<!-- <div id="assignedTasks" class="assignedTasks"> -->
+						<!-- Tasks will be displayed here -->
+					<!-- </div> -->
+					<div class="table-responsive table-section" id="reportStudentTable">
+						<table class="table table-bordered" style="width:100%">
+							<thead>
+								<tr>
+									<th>Teacher</th>
+									<th>Task</th>
+									<th>Deadline</th>
+								</tr>
+							</thead>
+							<tbody class="table-body">
+								
+							</tbody>
+							
+						</table>
+					</div>
+				</div>
+
+				<div class="form-group goals-section">
+					<h4 class="mb-3">Goals :</h4>
+					<ul class="report-goals"> </ul>
+				</div>
+
+				<div class="form-group actions-section">
+					<h4 class="mb-3">Actions :</h4>
+					<ul class="report-actions"> </ul>
+				</div>
+
+				<div class="row mt-5 no-print">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="desiredOutcome">Set desired student outcome</label>
+							<input type="text" class="form-control" id="desiredOutcome" placeholder="Text input">
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="evaluationDate">Set date to re-evaluate plan</label>
+							<input type="date" class="form-control" id="evaluationDate">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button type="button" id="" class="btn btn-secondary w-100 add-btn">Add</button>
+					</div>
+				</div>
+
+				<h3 class="mt-4 mb-4">Outcome and Date :</h3>
+
+	            <div class="text-center both-btn no-print">
+	            	<button type="button" class="btn btn-secondary prev prev-step-eight">Previous Step</button>
+					<a class="text-secondary" href="javascript:void(0)" onclick="printPage()"><i class="fas fa-print"></i></a>
+	            	<button type="submit" class="btn btn-success submit save-step-eight">Save</button>
 	            </div>
 	          </div>
 
@@ -336,54 +426,8 @@ include('includes/navbar.php');
 <?php include('includes/footer.php') ?>
 
 <script>
-	// STEP 1 : on change classes show students 
-	$('#class').change(function(){
-      	var selectedClass = $(this).val();
-      	$.ajax({
-         	url: "actions/action-forms.php",
-         	method: "POST",
-         	data: {selectedClass:selectedClass},
-         	crossDomain: true,
-         	cache: false,
-         	success: function(data) {
-				$('#student').html(data);
-         	}
-      	});
-   	})
-
-	// STEP 1 : on change students show student data in the table 
-	$('.na-text').show();
-	$('#student').change(function(){
-      	var selectedStudent = $(this).val();
-      	$.ajax({
-         	url: "actions/action-forms.php",
-         	method: "POST",
-         	data: {selectedStudent:selectedStudent},
-         	crossDomain: true,
-         	cache: false,
-         	success: function(data) {
-				var info = data.split("#");
-				// show male or female avatar
-				if(info[0] == 'm'){
-    				$(".boy-avatar").removeClass("d-none");
-    				$(".girl-avatar").addClass("d-none");
-				}else{
-					$(".boy-avatar").addClass("d-none");
-					$(".girl-avatar").removeClass("d-none");
-				}
-				// set data into the table
-				if(info[1] != ''){
-					$('.table-body').html(info[1]);
-					$(".table-section").removeClass("d-none");
-					$('.na-text').hide();
-					$(".no-data-text").addClass("d-none");
-				}else{
-					$(".table-section").addClass("d-none");
-					$('.na-text').hide();
-					$(".no-data-text").removeClass("d-none");
-				}
-         	}
-      	});
-   	})
+	function printPage(){
+		window.print();
+	}
 </script>
 

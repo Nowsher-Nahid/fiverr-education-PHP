@@ -30,12 +30,16 @@ $(".area-alert").hide();
     // Remove Option button click event
     $(document).on("click", ".remove-option-btn", function () {
       $(".area-alert").hide();
+      $('#selectedArea').val("");
+      $('#addedArea').val("");
       var optionToRemove = $(this).parent().text().trim();
       var index = selectedAreas.indexOf(optionToRemove);
       if (index !== -1) {
         selectedAreas.splice(index, 1);
         updateSelectedAreasList();
       }
+      $('#selectedArea').val('')
+      $('#addedArea').val('')
     });
 
     // Update the selected options list

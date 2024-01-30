@@ -6,6 +6,8 @@ var selectedActions = [];
       if (addedAction && !selectedActions.includes(addedAction)) {
         selectedActions.push(addedAction);
         updateSelectedActionList();
+      }else{
+        Swal.fire("Warning!", "This action is already added!", "error");
       }
     });
 
@@ -15,6 +17,8 @@ var selectedActions = [];
       if (selectedAction && !selectedActions.includes(selectedAction)) {
         selectedActions.push(selectedAction);
         updateSelectedActionList();
+      }else{
+        Swal.fire("Warning!", "This action is already added!", "error");
       }
     });
 
@@ -26,6 +30,8 @@ var selectedActions = [];
         selectedActions.splice(index, 1);
         updateSelectedActionList();
       }
+      $('#selectedAction').val('')
+      $('#addedAction').val('')
     });
 
     // Update the selected options list

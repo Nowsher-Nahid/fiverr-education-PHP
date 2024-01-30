@@ -5,7 +5,7 @@
     <a class="navbar-brand" href="#">
         <img src="assets/img/logo.png" alt="Logo" style="width: 85%">
     </a>
-    <span id="user-name">Nowsher Uzzaman Nahid</span>
+    <span id="user-name"><?php echo $full_name ?></span>
 
     <!-- Responsive navbar button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

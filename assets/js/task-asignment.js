@@ -43,6 +43,10 @@ function assignTask() {
 
   // Show alert for successful task assignment
   showAlert();
+  $('#taskSelect').val('')
+  $('#manualTask').val('')
+  $('#userSelect').val('')
+  $('#deadline').val('')
 }
 
 function showAlert() {
@@ -79,11 +83,21 @@ function displayAssignedTask(user, task, deadline) {
 }
 
 function displayUserTasks(user, tasks, deadline) {
-  var assignedTasksDiv = $('#assignedTasks');
+  var assignedTasksDiv = $('.assignedTasks');
   var userDiv = $('<div>').attr('id', 'user-' + user).addClass('user-box row');
   var userCol = $('<div>').addClass('col-md-3 my-auto text-center');
-  var userImage = $('<img>').attr('src', 'assets/img/avatar.png').addClass('user-image');
-  var userName = $('<h4>').text(user.replace("__"," ")).addClass('text-dark mt-2');
+
+  var getUser = user.split('__');
+
+  var userGender = getUser[2];
+  if(userGender == 'm'){
+    var userImage = $('<img>').attr('src', 'assets/img/sir.jpg').addClass('user-image');
+  }else{
+    var userImage = $('<img>').attr('src', 'assets/img/miss.jpg').addClass('user-image');
+  }
+  
+  var userName = $('<h4>').text(getUser[0]+' '+getUser[1]).addClass('text-dark mt-2');
+  // var userName = $('<h4>').text(user.replace("__"," ")).addClass('text-dark mt-2');
   var tasksContainer = $('<div>').addClass('tasks-container col-md-9 my-auto');
 
   userCol.append(userImage);
