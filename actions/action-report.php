@@ -12,4 +12,19 @@ if (isset($_POST['studentID']) && $_POST["studentID"]!="") {
     echo $student_code.'#'.$student_gender;
 }
 
+if(isset($_POST['reportStudentID']) && $_POST["reportStudentID"]!=""){
+    $studentID = $_POST['reportStudentID'];
+    $reportGoals = json_encode($_POST['reportGoals']);
+    $reportActions = json_encode($_POST['reportActions']);
+    $reportOutcomes = json_encode($_POST['reportOutcomes']);
+    $reportOutcomes = json_encode($_POST['reportOutcomes']);
+    $reportTaskAssignments = json_encode($_POST['reportTaskAssignments']);
+
+    $data = array('ID_pupil'=>$studentID,'task_assignments'=>$reportTaskAssignments,'goals'=>$reportGoals,'actions'=>$reportActions,'outcomes'=>$reportOutcomes);
+
+    $crudObj->insert("vd_report",$data);
+    $response = array(true);
+
+}
+
 ?>

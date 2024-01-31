@@ -52,37 +52,28 @@
 <?php include('modals/task-modal.php') ?>
 
 <script>
-// server side data processing 
-// $(document).ready(function(){
-//     $('#taskList').DataTable({
-//         "processing": true,
-//         "serverSide": true,
-//         "ajax": "actions/task-server.php",
-//     });
-// });
-
 // insert
 $("form[name='add_task_form']").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
     $.ajax({
-    url: "actions/action-task.php",
-    type: 'POST',
-    dataType: 'json',
-    data: formData,
-    success: function(data) {
-        if(data == 'true') {
-        Swal.fire("Done!", "Task added!", "success");
-            window.setTimeout(function() {
-            location.reload()
-            }, 1000); 
-        }else if(data == 'false'){
-            Swal.fire("Error!", "Task already exists!", "error");
-        }
-    },
-    cache: false,
-    contentType: false,
-    processData: false
+        url: "actions/action-task.php",
+        type: 'POST',
+        dataType: 'json',
+        data: formData,
+        success: function(data) {
+            if(data == 'true') {
+            Swal.fire("Done!", "Task added!", "success");
+                window.setTimeout(function() {
+                location.reload()
+                }, 1000); 
+            }else if(data == 'false'){
+                Swal.fire("Error!", "Task already exists!", "error");
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
     });
 });
 

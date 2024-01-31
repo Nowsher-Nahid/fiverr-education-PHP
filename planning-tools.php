@@ -202,7 +202,7 @@ include('includes/navbar.php');
 
 					<div class="form-group" id="selectTaskGroup">
 						<label for="taskSelect">Tasks</label>
-						<select class="form-control" id="taskSelect" required>
+						<select class="form-control" id="taskSelect">
 							<option value="">Select task</option>
 							<?php 
 							$get_tasks = $crudObj->dynamic_query('SELECT * FROM vd_task ORDER BY task');
@@ -220,7 +220,7 @@ include('includes/navbar.php');
 
 					<div class="form-group">
 						<label for="userSelect">Teachers</label>
-						<select class="form-control" id="userSelect" required>
+						<select class="form-control" id="userSelect">
 							<option value="">Select teacher</option>
 							<?php 
 							$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
@@ -236,7 +236,7 @@ include('includes/navbar.php');
 
 					<div class="form-group">
 						<label for="deadline">Select Deadline:</label>
-						<input type="date" class="form-control" id="deadline" required>
+						<input type="date" class="form-control" id="deadline">
 					</div>
 					<div class="mt-4 mb-5">
 						<button type="button" class="btn btn-primary btn-block" onclick="assignTask()">Assign Task</button>
@@ -283,7 +283,7 @@ include('includes/navbar.php');
 				  </div>
 	            </div>
 	            
-		         <!-- Selected Options Section -->
+		        <!-- Selected Options Section -->
 		        <div class="selected-options">
 		          <h3>Selected goals:</h3>
 		          <ul id="selectedGoalsList"></ul>
@@ -360,19 +360,16 @@ include('includes/navbar.php');
 
 				<div class="form-group">
 					<h4 class="mb-3">Task Assignments :</h4>
-					<!-- <div id="assignedTasks" class="assignedTasks"> -->
-						<!-- Tasks will be displayed here -->
-					<!-- </div> -->
+
 					<div class="table-responsive table-section" id="reportStudentTable">
 						<table class="table table-bordered" style="width:100%">
 							<thead>
 								<tr>
 									<th>Teacher</th>
 									<th>Task</th>
-									<th>Deadline</th>
 								</tr>
 							</thead>
-							<tbody class="table-body">
+							<tbody class="table-body" id="userTable">
 								
 							</tbody>
 							
@@ -393,8 +390,8 @@ include('includes/navbar.php');
 				<div class="row mt-5 no-print">
 					<div class="col-md-5">
 						<div class="form-group">
-							<label for="desiredOutcome">Set desired student outcome</label>
-							<input type="text" class="form-control" id="desiredOutcome" placeholder="Text input">
+							<label for="addedOutcome">Set desired student outcome</label>
+							<input type="text" class="form-control" id="addedOutcome" placeholder="Text input">
 						</div>
 					</div>
 					<div class="col-md-5">
@@ -404,11 +401,15 @@ include('includes/navbar.php');
 						</div>
 					</div>
 					<div class="col-md-2">
-						<button type="button" id="" class="btn btn-secondary w-100 add-btn">Add</button>
+						<button type="button" id="addOutcome" class="btn btn-secondary w-100 add-btn">Add</button>
 					</div>
 				</div>
 
-				<h3 class="mt-4 mb-4">Outcome and Date :</h3>
+				<!-- Selected Options Section -->
+		        <div class="selected-options">
+				<h3 class="mt-4 mb-3">Outcome and Date :</h3>
+		          	<ul id="selectedOutcomesList"></ul>
+		        </div>
 
 	            <div class="text-center both-btn no-print">
 	            	<button type="button" class="btn btn-secondary prev prev-step-eight">Previous Step</button>
