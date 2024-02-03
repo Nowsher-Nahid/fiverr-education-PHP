@@ -126,6 +126,9 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.btn-show-report {
+  margin-top: 32px;
+}
 
 /* print page */
 @media print {
@@ -182,5 +185,8 @@ body {
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  .btn-show-report {
+    margin-top: 13px;
   }
 }

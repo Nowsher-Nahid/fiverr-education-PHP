@@ -6,6 +6,15 @@ $(document).ready(function(){
         var selectedStudent = $('#student').val()
         var studentData = selectedStudent.split("#")
         var studentID = studentData[0]
+
+        if(selectedOptions.length === 0){
+            $('.teachers-section').hide()
+        }else{
+            $('.teachers-section').show()
+            for(var i=0; i<selectedOptions.length; i++){
+                $('.report-teachers').append('<li>'+selectedOptions[i]+'</li>')
+            }
+        }
         
         $('.user-box').each(function(){
             var userName = $(this).find('h4').text();
@@ -36,6 +45,7 @@ $(document).ready(function(){
         if(selectedGoals.length === 0){
             $('.goals-section').hide()
         }else{
+            $('.goals-section').show()
             for(var i=0; i<selectedGoals.length; i++){
                 $('.report-goals').append('<li>'+selectedGoals[i]+'</li>')
             }
@@ -44,6 +54,7 @@ $(document).ready(function(){
         if(selectedActions.length === 0){
             $('.actions-section').hide()
         }else{
+            $('.actions-section').show()
             for(var i=0; i<selectedActions.length; i++){
                 $('.report-actions').append('<li>'+selectedActions[i]+'</li>')
             }
@@ -68,6 +79,7 @@ $(document).ready(function(){
     });
 
     $(".prev-step-eight").click(function(){
+        $(".report-teachers").find("li").remove();
         $(".report-goals").find("li").remove();
         $(".report-actions").find("li").remove();
         $("#userTable").find("tr").remove();
@@ -115,11 +127,24 @@ $(document).ready(function(){
         var selectedStudent = $('#student').val()
         var studentData = selectedStudent.split("#")
         var reportStudentID = studentData[0]
+        var reportStudentName = $('.eight-student-name').html()
+        var reportArea = selectedAreas[0]
+        var userID = $('#user-id').val()
 
         $.ajax({
             url: "actions/action-report.php",
             method: "POST",
-            data: {reportStudentID:reportStudentID,reportGoals:selectedGoals,reportActions:selectedActions,reportOutcomes:selectedOutcomes,reportTaskAssignments:userDataArray},
+            data: {
+                reportStudentID:reportStudentID,
+                reportStudentName:reportStudentName,
+                reportTeachers:selectedOptions,
+                reportGoals:selectedGoals,
+                reportActions:selectedActions,
+                reportOutcomes:selectedOutcomes,
+                reportTaskAssignments:taskAssignments,
+                reportUserID:userID,
+                reportArea:reportArea
+            },
             crossDomain: true,
             cache: false,
             success: function(data) {

@@ -9,6 +9,11 @@
 <script src="assets/vendor/sweetalert2/sweetalert2.min.js"></script>
 <!-- script js -->
 <script src="assets/js/step.js"></script>
+
+<?php 
+$filename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+if($filename == 'planning-tools.php'){
+?>
 <script src="assets/js/teacher.js"></script>
 <script src="assets/js/area.js"></script>
 <script src="assets/js/student.js"></script>
@@ -16,6 +21,7 @@
 <script src="assets/js/action.js"></script>
 <script src="assets/js/task-asignment.js"></script>
 <script src="assets/js/report.js"></script>
+<?php } ?>
 
 </body>
 </html>

@@ -4,7 +4,7 @@ $crudObj = new CrudOparation;
 
 // Insert
 if (isset($_POST["task"]) && $_POST["task"]!="") {
-	$task = filter_var($_POST["task"], FILTER_SANITIZE_STRING);
+	$task = trim($_POST["task"]);
 
     $where = array('task'=>$task);
     $isExist = $crudObj->existence($where,"vd_task");

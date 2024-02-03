@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    $('#example').DataTable();
-
   var currentStep = 1;
 
   // Show the first step initially

@@ -2,14 +2,36 @@
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
+	<input type="text" value="<?php echo $user_id ?>" id="user-id" hidden>
 	<div class="container">
 	  <div class="row justify-content-center">
 	    <div class="col-md-12">
 	      <div class="form-container">
-	        <form id="multiStepForm">
+	        <!-- <form id="multiStepForm"> -->
 	          <!-- Step 1 -->
 	          <div class="step active" data-step="1">
 	            <h2 class="mb-4">Step 1 : Student Information</h2>
+
+				<div class="form-group mt-4">
+					<form action="edit-data.php" method="post">
+						<div class="row">
+							<div class="col-md-10">
+								<label for="plan">Open Existing Plan</label>
+								<select class="form-control" id="plan" name="plan" required>
+									<option value="">Select plan</option>
+									<?php
+									$get_plans = $crudObj->fetch_all_record('title','vd_report');
+									foreach($get_plans as $plan){ ?>
+										<option value="<?php echo $plan['title'] ?>"><?php echo $plan['title'] ?></option>
+									<?php } ?>
+								</select>
+							</div>
+							<div class="col-md-2">
+								<button type="submit" class="btn btn-secondary btn-show-report w-100">Show Report</button>
+							</div>
+						</div>
+					</form>
+				</div>
 
 	            <div class="row">
 	            	<div class="col-md-6">
@@ -26,20 +48,20 @@ include('includes/navbar.php');
 			            </div>
 			          </div>
 			         	<div class="col-md-6">
-			            <div class="form-group">
-			              <label for="student">Student</label>
-			              <select class="form-control" id="student">
-				              <option value="">Select class first</option>
-				            </select>
-			            </div>
+							<div class="form-group">
+							<label for="student">Student</label>
+							<select class="form-control" id="student">
+								<option value="">Select class first</option>
+								</select>
+							</div>
 			           </div>
-			         </div>
+			    	</div>
 			         <div class="">
-			         	<div class="student-image mt-3 mb-5">
+			         	<div class="student-image mt-3 mb-4">
 			         		<img class="boy-avatar d-none" src="assets/img/avatar.png" alt="Image" width="150">
 			         		<img class="girl-avatar d-none" src="assets/img/avatar-girl.jpg" alt="Image" width="150">
 			         	</div>
-						<h3 class="text-center my-4">Test Data</h3>
+						<h3 class="text-center my-3">Test Data</h3>
 						<h3 class="text-center text-danger na-text">No data available! Please select a class and a student.</h3>
 						<h3 class="text-center text-danger no-data-text d-none">Sorry, No data available for this student!</h3>
 			         	<div class="table-responsive table-section d-none">
@@ -58,7 +80,6 @@ include('includes/navbar.php');
 						    </table>
 			         	</div>
 			         </div>
-	            
 	            
 		        	<div class="text-center">
 	            	<button type="button" class="btn btn-primary next">Start Planning Tool</button>
@@ -79,7 +100,6 @@ include('includes/navbar.php');
 						?>
 						<option value="<?php echo $teacher_full_name ?>"><?php echo $teacher_full_name ?></option>
 						<?php } ?>
-
 		            </select>
 		        </div>
 	            <div class="form-group">
@@ -358,6 +378,11 @@ include('includes/navbar.php');
 					</div>
 				</div>
 
+				<div class="form-group teachers-section">
+					<h4 class="mb-3">Teachers :</h4>
+					<ul class="report-teachers"> </ul>
+				</div>
+
 				<div class="form-group">
 					<h4 class="mb-3">Task Assignments :</h4>
 
@@ -414,11 +439,11 @@ include('includes/navbar.php');
 	            <div class="text-center both-btn no-print">
 	            	<button type="button" class="btn btn-secondary prev prev-step-eight">Previous Step</button>
 					<a class="text-secondary" href="javascript:void(0)" onclick="printPage()"><i class="fas fa-print"></i></a>
-	            	<button type="submit" class="btn btn-success submit save-step-eight">Save</button>
+	            	<button type="button" class="btn btn-success submit save-step-eight">Save</button>
 	            </div>
 	          </div>
 
-	        </form>
+	        <!-- </form> -->
 	      </div>
 	    </div>
 	  </div>

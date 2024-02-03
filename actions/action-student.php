@@ -10,11 +10,12 @@ if (isset($_POST['studentID']) && $_POST["studentID"]!="") {
     $student_code = $get_student[0]['vd_pupil_code'];
 
     $where_area = array('vd_test_idx_fb'=>$area);
-    $get_prefixes = $crudObj->select_record('vd_test_idx_file',$where_area,'vd_test_idx');
+    $get_prefixes = $crudObj->select_record('vd_test_idx_name,vd_test_idx_file',$where_area,'vd_test_idx');
 
     $dataOption = '<option value="">Select test data</option>';
     foreach($get_prefixes as $data){
         $prefix = $data['vd_test_idx_file'];
+        $test_name = $data['vd_test_idx_name'];
         $table = 'vd_tb_'.$prefix;
         $where = array('ID_pupil'=>$studentID);
         $isStudentExist = $crudObj->existence($where, $table);
@@ -23,7 +24,8 @@ if (isset($_POST['studentID']) && $_POST["studentID"]!="") {
             $columnName = $columnPrefix.'_tst_gw';
             $get_marks = $crudObj->dynamic_query('SELECT '.$columnName.' FROM '.$table.' WHERE ID_pupil = "'.$studentID.'" ');
             $mark = $get_marks[0][0];
-            $dataOption .= '<option value='.$mark.'>'.$mark.'</option>';
+            $value = $test_name.' (Score: '.$mark.')';
+            $dataOption .= '<option value="'.$value.'">'.$value.'</option>';
         }
     }
 

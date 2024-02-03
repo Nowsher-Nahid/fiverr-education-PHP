@@ -1,6 +1,9 @@
-var taskAssignments = {};
+// Clear local storage on page load
+localStorage.clear();
 
 $(document).ready(function() {
+  // Load existing tasks from local storage
+
   $('input[name="taskEntry"]').change(function() {
     if ($('#manualEntry').is(':checked')) {
       $('#selectTaskGroup').hide();
@@ -23,34 +26,40 @@ function assignTask() {
   }
 
   // Check for existing tasks for the user
-  if (!taskAssignments[user]) {
-    taskAssignments[user] = [];
-  }
+  var existingTasks = getTasks(user);
 
   // Check if the task is already assigned
-  if (taskAssignments[user].some(t => t.task === task)) {
+  if (existingTasks.includes(task)) {
     Swal.fire("Warning!", "This task is already assigned to the user!", "error");
-    return;
+    return
   }
 
-  // Save the task assignment
-  taskAssignments[user].push({ task: task, deadline: deadline });
+  // Save the task to local storage
+  existingTasks.push(task);
+  saveTasks(user, existingTasks);
 
   // Display the assigned task
   displayAssignedTask(user, task, deadline);
 
   // Show alert for successful task assignment
   showAlert();
-
-  $('#taskSelect').val('');
-  $('#manualTask').val('');
-  $('#userSelect').val('');
-  $('#deadline').val('');
+  $('#taskSelect').val('')
+  $('#manualTask').val('')
+  $('#userSelect').val('')
+  $('#deadline').val('')
 }
-
 
 function showAlert() {
   Swal.fire("Done!", "The task has been assigned!", "success");
+}
+
+function saveTasks(user, tasks) {
+  localStorage.setItem(user, JSON.stringify(tasks));
+}
+
+function getTasks(user) {
+  var tasks = localStorage.getItem(user);
+  return tasks ? JSON.parse(tasks) : [];
 }
 
 function displayAssignedTask(user, task, deadline) {
@@ -69,15 +78,11 @@ function displayAssignedTask(user, task, deadline) {
     userDiv.find('.tasks-container').append(taskElement);
   } else {
     // User not displayed, create a new user entry
-    displayUserTasks(user, [{ task: task, deadline: deadline }]);
+    displayUserTasks(user, [task], deadline);
   }
 }
 
-function displayUserTasks(user, tasks) {
-
-  console.log(user)
-  console.log(tasks)
-
+function displayUserTasks(user, tasks, deadline) {
   var assignedTasksDiv = $('.assignedTasks');
   var userDiv = $('<div>').attr('id', 'user-' + user).addClass('user-box row');
   var userCol = $('<div>').addClass('col-md-3 my-auto text-center');
@@ -92,15 +97,16 @@ function displayUserTasks(user, tasks) {
   }
   
   var userName = $('<h4>').text(getUser[0]+' '+getUser[1]).addClass('text-dark mt-2');
+  // var userName = $('<h4>').text(user.replace("__"," ")).addClass('text-dark mt-2');
   var tasksContainer = $('<div>').addClass('tasks-container col-md-9 my-auto');
 
   userCol.append(userImage);
   userCol.append(userName);
 
-  tasks.forEach(function(taskObj) {
-    var taskElement = $('<div>').addClass('task-box').text(taskObj.task + ' (Deadline: ' + taskObj.deadline + ')');
+  tasks.forEach(function(task) {
+    var taskElement = $('<div>').addClass('task-box').text(task + ' (Deadline: ' + deadline + ')');
     var removeButton = $('<button>').text('Remove').addClass('btn btn-danger btn-sm remove-btn').click(function() {
-      removeTask(user, taskObj.task);
+      removeTask(user, task);
       taskElement.remove();
       checkAndRemoveUserSection(user);
     });
@@ -110,17 +116,15 @@ function displayUserTasks(user, tasks) {
 
   userDiv.append(userCol, tasksContainer);
   assignedTasksDiv.append(userDiv);
-
 }
 
 function removeTask(user, task) {
-  if (taskAssignments[user]) {
-    taskAssignments[user] = taskAssignments[user].filter(function(taskObj) {
-      return taskObj.task !== task;
-    });
-  }
+  var existingTasks = getTasks(user);
+  var updatedTasks = existingTasks.filter(function(existingTask) {
+    return existingTask !== task;
+  });
+  saveTasks(user, updatedTasks);
 }
-
 
 function checkAndRemoveUserSection(user) {
   var userDiv = $('#user-' + user);
