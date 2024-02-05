@@ -24,10 +24,11 @@ if(isset($_POST['reportStudentID']) && $_POST["reportStudentID"]!=""){
     $reportActions = json_encode($_POST['reportActions']);
     $reportOutcomes = json_encode($_POST['reportOutcomes']);
     $reportTaskAssignments = json_encode($_POST['reportTaskAssignments']);
+    $reportTests = json_encode($_POST['reportTests']);
 
     $title = 'Name: '.$reportStudentName.', Area: '.$reportArea.', Date: '.$creationDate;
 
-    $data = array('ID_pupil'=>$studentID,'title'=>$title,'teachers'=>$reportTeachers,'task_assignments'=>$reportTaskAssignments,'goals'=>$reportGoals,'actions'=>$reportActions,'outcomes'=>$reportOutcomes,'created_at'=>$creationDate,'created_by'=>$createdBy,'area'=>$reportArea);
+    $data = array('ID_pupil'=>$studentID,'title'=>$title,'teachers'=>$reportTeachers,'task_assignments'=>$reportTaskAssignments,'goals'=>$reportGoals,'actions'=>$reportActions,'outcomes'=>$reportOutcomes,'created_at'=>$creationDate,'created_by'=>$createdBy,'area'=>$reportArea,'tests'=>$reportTests);
 
     $crudObj->insert("vd_report",$data);
     $response = array(true);

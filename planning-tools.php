@@ -97,16 +97,30 @@ include('includes/navbar.php');
 						$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
 						foreach($get_teachers as $teacher){
 						$teacher_full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+						$teacher_gender = $teacher['vd_user_sex'];
 						?>
-						<option value="<?php echo $teacher_full_name ?>"><?php echo $teacher_full_name ?></option>
+						<option value="<?php echo $teacher_full_name."##".$teacher_gender ?>"><?php echo $teacher_full_name ?></option>
 						<?php } ?>
 		            </select>
 		        </div>
 	            <div class="form-group">
 	              <label for="addedGoal">Enter further person</label>
-				  <div class="further-person d-flex">
-				  	<input type="text" class="form-control" id="addedTeacher" placeholder="Text input">
-					<button type="button" id="addTeacher" class="btn btn-secondary">Add</button>
+				  <div class="further-person">
+					<div class="row">
+						<div class="col-md-5">
+							<input type="text" class="form-control" id="addedTeacher" placeholder="Text input">
+						</div>
+						<div class="col-md-5">
+							<select class="form-control" id="addedTeacherGender">
+								<option value="">Select gender</option>
+								<option value="m">Male</option>
+								<option value="w">Female</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<button type="button" id="addTeacher" class="btn btn-secondary w-100">Add</button>
+						</div>
+					</div>
 				  </div>
 	            </div>
 	            
@@ -242,15 +256,16 @@ include('includes/navbar.php');
 						<label for="userSelect">Teachers</label>
 						<select class="form-control" id="userSelect">
 							<option value="">Select teacher</option>
-							<?php 
+							<!-- <//?php 
+							
 							$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
 							foreach($get_teachers as $teacher){
 								$user_gender = $teacher['vd_user_sex'];
 								$full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
 								$full_name_class = str_replace(' ', '__', $full_name).'__'.$user_gender;
 							?>
-							<option value="<?php echo $full_name_class ?>"><?php echo $full_name ?></option>
-							<?php } ?>
+							<option value="<//?php echo $full_name_class ?>"><//?php echo $full_name ?></option>
+							<//?php } ?> -->
 						</select>
 					</div>
 
@@ -351,7 +366,7 @@ include('includes/navbar.php');
 
 	          <!-- Step 8 -->
 	          <div class="step" data-step="8">
-	            <h2><span class="no-print">Step 8 : </span>Report / Summary</h2>
+	            <h2>Report / Summary</h2>
 				<div class="image-container">
 					<div class="user-info">
 						<img src="" width="80" class="rounded-circle eight-student-image" alt="">
@@ -359,23 +374,9 @@ include('includes/navbar.php');
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<div class="form-group student-section">
 					<h4 class="mb-3">Student Information :</h4>
-					<div class="table-responsive table-section">
-						<table id="studentTable" class="table table-bordered" style="width:100%">
-							<thead>
-								<tr>
-									<th>Area</th>
-									<th>Test</th>
-									<th>Score</th>
-								</tr>
-							</thead>
-							<tbody class="table-body-section">
-								
-							</tbody>
-							
-						</table>
-					</div>
+					<ul class="report-student-info"> </ul>
 				</div>
 
 				<div class="form-group teachers-section">

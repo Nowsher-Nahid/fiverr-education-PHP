@@ -1,8 +1,5 @@
 <?php include 'dbConnection.php';
-require_once('inc/class.phpmailer.php');
 $dbObj=new DatabaseConnection;
- 
-
 
 class CrudOparation extends DatabaseConnection {
 

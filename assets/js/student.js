@@ -1,4 +1,3 @@
-$(document).ready(function(){
     
     $(".next-three").click(function(){
         var selectedStudent = $('#student').val()
@@ -59,4 +58,3 @@ $(document).ready(function(){
         }
     }
 
-});

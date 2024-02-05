@@ -51,12 +51,20 @@ $('#student').change(function(){
     // Add Option button click event
     $("#addTeacher").click(function () {
       var addedTeacher = $("#addedTeacher").val();
-      if (addedTeacher && !selectedOptions.includes(addedTeacher)) {
-        selectedOptions.push(addedTeacher);
-        updateSelectedOptionsList();
+      var addedTeacherGender = $("#addedTeacherGender").val();
+      if(addedTeacherGender == ""){
+        Swal.fire("Warning!", "Select a gender!", "error");
       }else{
-        Swal.fire("Warning!", "This teacher is already added!", "error");
+        var TeacherAndGender = addedTeacher+"##"+addedTeacherGender;
+        if (TeacherAndGender && !selectedOptions.includes(TeacherAndGender)) {
+          selectedOptions.push(TeacherAndGender);
+          updateSelectedOptionsList();
+        }else{
+          Swal.fire("Warning!", "This teacher is already added!", "error");
+        }
       }
+      $("#addedTeacher").val("");
+      $("#addedTeacherGender").val("");
     });
 
     // Handle select change event
@@ -72,7 +80,8 @@ $('#student').change(function(){
 
     // Remove Option button click event
     $(document).on("click", ".remove-option-btn", function () {
-      var optionToRemove = $(this).parent().text().trim();
+      
+      var optionToRemove = $(this).parent().attr('data-id').trim();
       var index = selectedOptions.indexOf(optionToRemove);
       if (index !== -1) {
         selectedOptions.splice(index, 1);
@@ -85,7 +94,14 @@ $('#student').change(function(){
     // Update the selected options list
     function updateSelectedOptionsList() {
       $("#selectedOptionsList").empty();
+      $("#userSelect").html("<option value=''>Select teacher</option>");
       for (var i = 0; i < selectedOptions.length; i++) {
-        $("#selectedOptionsList").append("<li>" + selectedOptions[i] + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
+        var splitData = selectedOptions[i].split('##');
+        var name = splitData[0];
+        var gender = splitData[1];
+        var name_gender = name.replace(/ /g,"__")+"__"+gender;
+        var setDataID = name+'##'+gender;
+        $("#selectedOptionsList").append("<li data-id='"+setDataID+"'>" + name + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
+        $("#userSelect").append("<option value='"+name_gender+"'>" + name + " </option>");
       }
     }

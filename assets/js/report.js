@@ -7,12 +7,23 @@ $(document).ready(function(){
         var studentData = selectedStudent.split("#")
         var studentID = studentData[0]
 
+        if(selectedTests.length === 0){
+            $('.student-section').hide()
+        }else{
+            $('.student-section').show()
+            for(var i=0; i<selectedTests.length; i++){
+                $('.report-student-info').append('<li>'+selectedTests[i]+'</li>')
+            }
+        }
+
         if(selectedOptions.length === 0){
             $('.teachers-section').hide()
         }else{
             $('.teachers-section').show()
             for(var i=0; i<selectedOptions.length; i++){
-                $('.report-teachers').append('<li>'+selectedOptions[i]+'</li>')
+                var splitData = selectedOptions[i].split('##');
+                var name = splitData[0];
+                $('.report-teachers').append('<li>'+name+'</li>')
             }
         }
         
@@ -79,6 +90,7 @@ $(document).ready(function(){
     });
 
     $(".prev-step-eight").click(function(){
+        $(".report-student-info").find("li").remove();
         $(".report-teachers").find("li").remove();
         $(".report-goals").find("li").remove();
         $(".report-actions").find("li").remove();
@@ -143,7 +155,8 @@ $(document).ready(function(){
                 reportOutcomes:selectedOutcomes,
                 reportTaskAssignments:taskAssignments,
                 reportUserID:userID,
-                reportArea:reportArea
+                reportArea:reportArea,
+                reportTests:selectedTests
             },
             crossDomain: true,
             cache: false,
