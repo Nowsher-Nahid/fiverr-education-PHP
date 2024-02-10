@@ -79,7 +79,7 @@ $tests = $get_report[0]['tests'];
 		          <ul id="selectedOptionsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            <button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            <button type="button" class="btn btn-primary next ml-2 edit-one-next">Next Step</button>
 	          </div>
           </div>
 
@@ -120,15 +120,6 @@ $tests = $get_report[0]['tests'];
                   <label for="userSelect">Teachers</label>
                   <select class="form-control" id="userSelect">
                     <option value="">Select teacher</option>
-                    <!-- <//?php 
-                    $get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
-                    foreach($get_teachers as $teacher){
-                      $user_gender = $teacher['vd_user_sex'];
-                      $full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
-                      $full_name_class = str_replace(' ', '__', $full_name).'__'.$user_gender;
-                    ?>
-                    <option value="<//?php echo $full_name_class ?>"><//?php echo $full_name ?></option>
-                    <//?php } ?> -->
                   </select>
                 </div>
 
@@ -150,8 +141,8 @@ $tests = $get_report[0]['tests'];
             </div>
 
 				    <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 edit-two-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 edit-two-next">Next Step</button>
 	            </div>
 	        </div>
 
@@ -184,8 +175,8 @@ $tests = $get_report[0]['tests'];
                 <ul id="selectedGoalsList"></ul>
               </div>
                 <div class="text-center both-btn">
-                  <button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-                  <button type="button" class="btn btn-primary next ml-2">Next Step</button>
+                  <button type="button" class="btn btn-secondary prev mr-2 edit-three-prev">Previous Step</button>
+                  <button type="button" class="btn btn-primary next ml-2 edit-three-next">Next Step</button>
                 </div>
             </div>
 
@@ -218,8 +209,8 @@ $tests = $get_report[0]['tests'];
 		          <ul id="selectedActionsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 next-four">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 edit-four-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 next-four edit-four-next">Next Step</button>
 	            </div>
 	          </div>
 
@@ -236,21 +227,6 @@ $tests = $get_report[0]['tests'];
               <div class="form-group">
                 <h4 class="mb-3">Student Information :</h4>
                 <ul class="report-student-info"> </ul>
-                <!-- <div class="table-responsive table-section">
-                  <table id="studentTable" class="table table-bordered" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>Area</th>
-                        <th>Test</th>
-                        <th>Score</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-body-section">
-                      
-                    </tbody>
-                    
-                  </table>
-                </div> -->
               </div>
 
               <div class="form-group teachers-section">
@@ -311,7 +287,7 @@ $tests = $get_report[0]['tests'];
               </div>
 
               <div class="text-center both-btn no-print">
-                <button type="button" class="btn btn-secondary prev prev-step-eight">Previous Step</button>
+                <button type="button" class="btn btn-secondary prev prev-step-eight edit-five-prev">Previous Step</button>
 					      <a class="text-secondary" href="javascript:void(0)" onclick="printPage()"><i class="fas fa-print"></i></a>
                 <button type="button" class="btn btn-success submit save-step-eight btn-edit-save">Save</button>
               </div>
@@ -458,7 +434,7 @@ $("#selectedOption").change(function () {
 });
 
 // Remove Option button click event
-$(document).on("click", ".remove-option-btn", function () {
+$(document).on("click", ".remove-teacher-btn", function () {
   var optionToRemove = $(this).parent().attr('data-id').trim();
   var index = selectedOptions.indexOf(optionToRemove);
   if (index !== -1) {
@@ -479,7 +455,7 @@ function updateSelectedOptionsList() {
     var gender = splitData[1];
     var name_gender = name.replace(/ /g,"__")+"__"+gender;
     var setDataID = name+'##'+gender;
-    $("#selectedOptionsList").append("<li data-id='"+setDataID+"'>" + name + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
+    $("#selectedOptionsList").append("<li data-id='"+setDataID+"'>" + name + " <i class='fas fa-trash text-danger ml-2 remove-teacher-btn'></i></li>");
     $("#userSelect").append("<option value='"+name_gender+"'>" + name + " </option>");
   }
 }
@@ -774,26 +750,29 @@ function updateSelectedOutcomeList() {
       var userID = $('#user-id').val()
       var area = $('#area').val()
       var studentID = $('#student-id').val()
-
-      $.ajax({
-          url: "actions/action-edit.php",
-          method: "POST",
-          data: {
-              userID:userID,
-              area:area,
-              studentID:studentID,
-              teachers:selectedOptions,
-              goals:selectedGoals,
-              actions:selectedActions,
-              outcomes:selectedOutcomes,
-              taskAssignments:taskAssignments,
-              tests:selectedTests
-          },
-          crossDomain: true,
-          cache: false,
-          success: function(data) {
-              Swal.fire("Done!", "Report saved!", "success");
-          }
-      });
+      if(selectedOutcomes.length !== 0){
+        $.ajax({
+            url: "actions/action-edit.php",
+            method: "POST",
+            data: {
+                userID:userID,
+                area:area,
+                studentID:studentID,
+                teachers:selectedOptions,
+                goals:selectedGoals,
+                actions:selectedActions,
+                outcomes:selectedOutcomes,
+                taskAssignments:taskAssignments,
+                tests:selectedTests
+            },
+            crossDomain: true,
+            cache: false,
+            success: function(data) {
+                Swal.fire("Done!", "Report saved!", "success");
+            }
+        });
+      }else{
+            Swal.fire("Error!", "Please set a desired outcome and evaluation date!", "error");
+      }
   });
 </script>

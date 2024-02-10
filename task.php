@@ -7,6 +7,7 @@
 	        <div class="form-container">
                 <h3 class="mb-3 text-center">Create a new task</h3>
                 <form name="add_task_form">
+                    <input type="text" value="<?php echo $user_id ?>" name="user_id" hidden>
                     <div class="form-group">
                         <label for="task">Enter task</label>
                         <textarea class="form-control" name="task" id="task" placeholder="Write here..."></textarea>
@@ -28,7 +29,7 @@
                     <tbody>
                         <?php
                             $counter = 1;
-                            $get_tasks = $crudObj->dynamic_query('SELECT * FROM vd_task');
+                            $get_tasks = $crudObj->dynamic_query('SELECT * FROM vd_task WHERE created_by="'.$user_id.'"');
                             foreach ($get_tasks as  $task) {
                         ?>
                         <tr>

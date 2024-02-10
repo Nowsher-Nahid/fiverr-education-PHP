@@ -7,6 +7,7 @@
 	        <div class="form-container">
                 <h3 class="mb-3 text-center">Create a new goal</h3>
                 <form name="add_goal_form">
+                    <input type="text" value="<?php echo $user_id ?>" name="user_id" hidden>
                     <div class="form-group">
                         <label for="goal">Enter goal</label>
                         <textarea class="form-control" name="goal" id="goal" placeholder="Write here..."></textarea>
@@ -28,7 +29,7 @@
                     <tbody>
                         <?php
                             $counter = 1;
-                            $get_goals = $crudObj->dynamic_query('SELECT * FROM vd_goal');
+                            $get_goals = $crudObj->dynamic_query('SELECT * FROM vd_goal WHERE created_by="'.$user_id.'"');
                             foreach ($get_goals as  $goal) {
                         ?>
                         <tr>

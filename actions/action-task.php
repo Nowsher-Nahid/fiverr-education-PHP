@@ -5,6 +5,8 @@ $crudObj = new CrudOparation;
 // Insert
 if (isset($_POST["task"]) && $_POST["task"]!="") {
 	$task = trim($_POST["task"]);
+	$created_by = $_POST["user_id"];
+	$created_at = date("Y-m-d H:i:s");
 
     $where = array('task'=>$task);
     $isExist = $crudObj->existence($where,"vd_task");
@@ -12,7 +14,7 @@ if (isset($_POST["task"]) && $_POST["task"]!="") {
     if($isExist[0] > 0){
         $response = array(false);
     }else{
-        $data = array("task" => $task);
+        $data = array("task" => $task,"created_by" => $created_by,"created_at" => $created_at);
         $crudObj->insert("vd_task",$data);
         $response = array(true);
     }

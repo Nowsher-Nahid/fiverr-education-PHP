@@ -79,7 +79,7 @@ $('#student').change(function(){
     });
 
     // Remove Option button click event
-    $(document).on("click", ".remove-option-btn", function () {
+    $(document).on("click", ".remove-teacher-btn", function () {
       
       var optionToRemove = $(this).parent().attr('data-id').trim();
       var index = selectedOptions.indexOf(optionToRemove);
@@ -101,7 +101,7 @@ $('#student').change(function(){
         var gender = splitData[1];
         var name_gender = name.replace(/ /g,"__")+"__"+gender;
         var setDataID = name+'##'+gender;
-        $("#selectedOptionsList").append("<li data-id='"+setDataID+"'>" + name + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
+        $("#selectedOptionsList").append("<li data-id='"+setDataID+"'>" + name + " <i class='fas fa-trash text-danger ml-2 remove-teacher-btn'></i></li>");
         $("#userSelect").append("<option value='"+name_gender+"'>" + name + " </option>");
       }
     }

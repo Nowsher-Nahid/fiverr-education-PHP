@@ -10,6 +10,10 @@
 <!-- script js -->
 <script src="assets/js/step.js"></script>
 
+<script>
+    let table = new DataTable('#example');
+</script>
+
 <?php 
 $filename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 if($filename == 'planning-tools.php'){

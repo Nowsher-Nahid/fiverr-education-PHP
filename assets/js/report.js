@@ -143,27 +143,33 @@ $(document).ready(function(){
         var reportArea = selectedAreas[0]
         var userID = $('#user-id').val()
 
-        $.ajax({
-            url: "actions/action-report.php",
-            method: "POST",
-            data: {
-                reportStudentID:reportStudentID,
-                reportStudentName:reportStudentName,
-                reportTeachers:selectedOptions,
-                reportGoals:selectedGoals,
-                reportActions:selectedActions,
-                reportOutcomes:selectedOutcomes,
-                reportTaskAssignments:taskAssignments,
-                reportUserID:userID,
-                reportArea:reportArea,
-                reportTests:selectedTests
-            },
-            crossDomain: true,
-            cache: false,
-            success: function(data) {
-                Swal.fire("Done!", "Report saved!", "success");
-            }
-        });
+        var outcome = $('#addedOutcome').val()
+        var evaluationDate = $('#evaluationDate').val()
+        if(selectedOutcomes.length !== 0){
+            $.ajax({
+                url: "actions/action-report.php",
+                method: "POST",
+                data: {
+                    reportStudentID:reportStudentID,
+                    reportStudentName:reportStudentName,
+                    reportTeachers:selectedOptions,
+                    reportGoals:selectedGoals,
+                    reportActions:selectedActions,
+                    reportOutcomes:selectedOutcomes,
+                    reportTaskAssignments:taskAssignments,
+                    reportUserID:userID,
+                    reportArea:reportArea,
+                    reportTests:selectedTests
+                },
+                crossDomain: true,
+                cache: false,
+                success: function(data) {
+                    Swal.fire("Done!", "Report saved!", "success");
+                }
+            });
+        }else{
+            Swal.fire("Error!", "Please set a desired outcome and evaluation date!", "error");
+        }
     });
 
 });

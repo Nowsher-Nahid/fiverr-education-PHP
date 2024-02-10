@@ -82,7 +82,7 @@ include('includes/navbar.php');
 			         </div>
 	            
 		        	<div class="text-center">
-	            	<button type="button" class="btn btn-primary next">Start Planning Tool</button>
+	            	<button type="button" class="btn btn-primary next one">Start Planning Tool</button>
 	            </div>
 	          </div>
 
@@ -130,8 +130,8 @@ include('includes/navbar.php');
 		          <ul id="selectedOptionsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 two-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 two-next">Next Step</button>
 	            </div>
 	          </div>
 
@@ -175,8 +175,8 @@ include('includes/navbar.php');
 		          <ul id="selectedAreaList"></ul>
 		        </div>
 	            <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 next-three">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 three-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 next-three three-next">Next Step</button>
 	            </div>
 	          </div>
 
@@ -212,8 +212,8 @@ include('includes/navbar.php');
 		        </div>
 
 	            <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 four-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 four-next">Next Step</button>
 	            </div>
 	          </div>
 
@@ -239,7 +239,7 @@ include('includes/navbar.php');
 						<select class="form-control" id="taskSelect">
 							<option value="">Select task</option>
 							<?php 
-							$get_tasks = $crudObj->dynamic_query('SELECT * FROM vd_task ORDER BY task');
+							$get_tasks = $crudObj->dynamic_query('SELECT * FROM vd_task WHERE created_by = "'.$user_id.'" ORDER BY task');
 							foreach($get_tasks as $task){
 							?>
 							<option value="<?php echo $task['task'] ?>"><?php echo $task['task'] ?></option>
@@ -256,16 +256,6 @@ include('includes/navbar.php');
 						<label for="userSelect">Teachers</label>
 						<select class="form-control" id="userSelect">
 							<option value="">Select teacher</option>
-							<!-- <//?php 
-							
-							$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
-							foreach($get_teachers as $teacher){
-								$user_gender = $teacher['vd_user_sex'];
-								$full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
-								$full_name_class = str_replace(' ', '__', $full_name).'__'.$user_gender;
-							?>
-							<option value="<//?php echo $full_name_class ?>"><//?php echo $full_name ?></option>
-							<//?php } ?> -->
 						</select>
 					</div>
 
@@ -287,8 +277,8 @@ include('includes/navbar.php');
 				</div>
 
 				<div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 five-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 five-next">Next Step</button>
 	            </div>
 	          </div>
 
@@ -302,7 +292,7 @@ include('includes/navbar.php');
 		            <select class="form-control" id="selectedGoal">
 						<option value="">Select goal</option>
 						<?php 
-						$get_goals = $crudObj->dynamic_query('SELECT * FROM vd_goal');
+						$get_goals = $crudObj->dynamic_query('SELECT * FROM vd_goal WHERE created_by = "'.$user_id.'"');
 						foreach($get_goals as $goal){
 						?>
 						<option value="<?php echo $goal['goal'] ?>"><?php echo $goal['goal'] ?></option>
@@ -324,8 +314,8 @@ include('includes/navbar.php');
 		          <ul id="selectedGoalsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 six-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 six-next">Next Step</button>
 	            </div>
 	          </div>
 
@@ -337,7 +327,7 @@ include('includes/navbar.php');
 		            <select class="form-control" id="selectedAction">
 						<option value="">Select action</option>
 						<?php 
-						$get_actions = $crudObj->dynamic_query('SELECT * FROM vd_action');
+						$get_actions = $crudObj->dynamic_query('SELECT * FROM vd_action WHERE created_by = "'.$user_id.'"');
 						foreach($get_actions as $action){
 						?>
 						<option value="<?php echo $action['action'] ?>"><?php echo $action['action'] ?></option>
@@ -359,8 +349,8 @@ include('includes/navbar.php');
 		          <ul id="selectedActionsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 next-seven">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 seven-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 next-seven seven-next">Next Step</button>
 	            </div>
 	          </div>
 
@@ -438,7 +428,7 @@ include('includes/navbar.php');
 		        </div>
 
 	            <div class="text-center both-btn no-print">
-	            	<button type="button" class="btn btn-secondary prev prev-step-eight">Previous Step</button>
+	            	<button type="button" class="btn btn-secondary prev prev-step-eight eight-prev">Previous Step</button>
 					<a class="text-secondary" href="javascript:void(0)" onclick="printPage()"><i class="fas fa-print"></i></a>
 	            	<button type="button" class="btn btn-success submit save-step-eight">Save</button>
 	            </div>

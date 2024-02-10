@@ -5,6 +5,8 @@ $crudObj = new CrudOparation;
 // Insert
 if (isset($_POST["goal"]) && $_POST["goal"]!="") {
 	$goal = filter_var($_POST["goal"], FILTER_SANITIZE_STRING);
+	$created_by = $_POST["user_id"];
+	$created_at = date("Y-m-d H:i:s");
 
     $where = array('goal'=>$goal);
     $isExist = $crudObj->existence($where,"vd_goal");
@@ -12,7 +14,7 @@ if (isset($_POST["goal"]) && $_POST["goal"]!="") {
     if($isExist[0] > 0){
         $response = array(false);
     }else{
-        $data = array("goal" => $goal);
+        $data = array("goal" => $goal,"created_by" => $created_by,"created_at" => $created_at);
         $crudObj->insert("vd_goal",$data);
         $response = array(true);
     }

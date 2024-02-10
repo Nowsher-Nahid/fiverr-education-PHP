@@ -38,7 +38,8 @@ body {
 .selected-options {
   margin-top: 20px;
 }
-.remove-option-btn {
+.remove-option-btn,
+.remove-teacher-btn {
   cursor: pointer;
 }
 

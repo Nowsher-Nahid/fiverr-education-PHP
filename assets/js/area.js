@@ -32,6 +32,7 @@ $(".area-alert").hide();
       $(".area-alert").hide();
       $('#selectedArea').val("");
       $('#addedArea').val("");
+      // console.log($(this).parent().text())
       var optionToRemove = $(this).parent().text().trim();
       var index = selectedAreas.indexOf(optionToRemove);
       if (index !== -1) {

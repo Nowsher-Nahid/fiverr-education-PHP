@@ -7,6 +7,7 @@
 	        <div class="form-container">
                 <h3 class="mb-3 text-center">Create a new action</h3>
                 <form name="add_action_form">
+                    <input type="text" value="<?php echo $user_id ?>" name="user_id" hidden>
                     <div class="form-group">
                         <label for="goal">Enter action</label>
                         <textarea class="form-control" name="action" id="action" placeholder="Write here..."></textarea>
@@ -28,7 +29,7 @@
                     <tbody>
                         <?php
                             $counter = 1;
-                            $get_actions = $crudObj->dynamic_query('SELECT * FROM vd_action');
+                            $get_actions = $crudObj->dynamic_query('SELECT * FROM vd_action WHERE created_by="'.$user_id.'"');
                             foreach ($get_actions as  $action) {
                         ?>
                         <tr>
