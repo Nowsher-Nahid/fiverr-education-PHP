@@ -59,23 +59,23 @@ $("form[name='add_goal_form']").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
     $.ajax({
-    url: "actions/action-goal.php",
-    type: 'POST',
-    dataType: 'json',
-    data: formData,
-    success: function(data) {
-        if(data == 'true') {
-        Swal.fire("Done!", "Goal added!", "success");
-            window.setTimeout(function() {
-            location.reload()
-            }, 1000); 
-        }else if(data == 'false'){
-            Swal.fire("Error!", "Goal already exists!", "error");
-        }
-    },
-    cache: false,
-    contentType: false,
-    processData: false
+        url: "actions/action-goal.php",
+        type: 'POST',
+        dataType: 'json',
+        data: formData,
+        success: function(data) {
+            if(data == 'true') {
+                Swal.fire("Done!", "Goal added!", "success");
+                window.setTimeout(function() {
+                location.reload()
+                }, 1000); 
+            }else if(data == 'false'){
+                Swal.fire("Error!", "Goal already exists!", "error");
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
     });
 });
 

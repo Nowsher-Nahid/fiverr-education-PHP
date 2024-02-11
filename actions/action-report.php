@@ -32,7 +32,6 @@ if(isset($_POST['reportStudentID']) && $_POST["reportStudentID"]!=""){
 
     $crudObj->insert("vd_report",$data);
     $response = array(true);
-
 }
 
 ?>

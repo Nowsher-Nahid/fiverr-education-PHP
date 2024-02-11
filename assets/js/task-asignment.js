@@ -83,9 +83,6 @@ function displayAssignedTask(user, task, deadline) {
 
 function displayUserTasks(user, tasks) {
 
-  console.log(user)
-  console.log(tasks)
-
   var assignedTasksDiv = $('.assignedTasks');
   var userDiv = $('<div>').attr('id', 'user-' + user).addClass('user-box row');
   var userCol = $('<div>').addClass('col-md-3 my-auto text-center');

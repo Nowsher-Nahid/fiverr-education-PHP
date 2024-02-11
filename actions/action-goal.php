@@ -8,7 +8,7 @@ if (isset($_POST["goal"]) && $_POST["goal"]!="") {
 	$created_by = $_POST["user_id"];
 	$created_at = date("Y-m-d H:i:s");
 
-    $where = array('goal'=>$goal);
+    $where = array('goal'=>$goal,'created_by'=>$created_by);
     $isExist = $crudObj->existence($where,"vd_goal");
 
     if($isExist[0] > 0){

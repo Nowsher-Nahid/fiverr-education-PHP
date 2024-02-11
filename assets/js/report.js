@@ -6,6 +6,7 @@ $(document).ready(function(){
         var selectedStudent = $('#student').val()
         var studentData = selectedStudent.split("#")
         var studentID = studentData[0]
+        $('#reportStudentTable').removeClass("d-none");
 
         if(selectedTests.length === 0){
             $('.student-section').hide()
@@ -100,6 +101,7 @@ $(document).ready(function(){
 
     $(".prev-step-eight").click(function(){
         $(".report-student-info").find("li").remove();
+        $(".report-school-area").find("li").remove();
         $(".report-teachers").find("li").remove();
         $(".report-goals").find("li").remove();
         $(".report-actions").find("li").remove();

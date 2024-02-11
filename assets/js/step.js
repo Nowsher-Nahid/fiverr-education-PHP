@@ -57,14 +57,10 @@ $(document).ready(function () {
     $(".step[data-step='2']").addClass('active').show();
   })
 
-  // FOUR -------------------------------------------------------------------------------------------
+  // FOUR : Test -------------------------------------------------------------------------------------------
   $('.four-next').click(function(){
-    if(selectedTests.length === 0){
-      Swal.fire("Error!", "Please select test data!", "error");
-    }else{
-      $(".step[data-step='4']").removeClass('active').hide();
-      $(".step[data-step='5']").addClass('active').show();
-    }
+    $(".step[data-step='4']").removeClass('active').hide();
+    $(".step[data-step='5']").addClass('active').show();
   })
   $('.four-prev').click(function(){
     $(".step[data-step='4']").removeClass('active').hide();
