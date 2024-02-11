@@ -7,24 +7,24 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <!-- sweet alert  -->
 <script src="assets/vendor/sweetalert2/sweetalert2.min.js"></script>
-<!-- script js -->
-<script src="assets/js/step.js"></script>
 
 <script>
     let table = new DataTable('#example');
 </script>
 
+<script src="assets/js/step.js"></script>
 <?php 
 $filename = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 if($filename == 'planning-tools.php'){
 ?>
-<script src="assets/js/teacher.js"></script>
-<script src="assets/js/area.js"></script>
-<script src="assets/js/student.js"></script>
-<script src="assets/js/goal.js"></script>
-<script src="assets/js/action.js"></script>
-<script src="assets/js/task-asignment.js"></script>
-<script src="assets/js/report.js"></script>
+<?php $currentDateTime = date("Y-m-dH:i:s"); ?>
+<script src="assets/js/teacher.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/area.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/student.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/goal.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/action.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/task-asignment.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/report.js?version=<?php echo $currentDateTime ?>"></script>
 <?php } ?>
 
 </body>

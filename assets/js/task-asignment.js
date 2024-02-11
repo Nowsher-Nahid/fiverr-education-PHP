@@ -17,8 +17,16 @@ function assignTask() {
   var task = ($('#manualEntry').is(':checked')) ? $('#manualTask').val() : $('#taskSelect').val();
   var deadline = $('#deadline').val();
 
+  if (task === "") {
+    Swal.fire("Warning!", "Please select a task!", "error");
+    return;
+  }
+  if (user === "") {
+    Swal.fire("Warning!", "Please select a teacher!", "error");
+    return;
+  }
   if (deadline === "") {
-    alert('Please select a deadline.');
+    Swal.fire("Warning!", "Please select a deadline!", "error");
     return;
   }
 

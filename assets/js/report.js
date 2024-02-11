@@ -16,6 +16,15 @@ $(document).ready(function(){
             }
         }
 
+        if(selectedAreas.length === 0){
+            $('.area-section').hide()
+        }else{
+            $('.area-section').show()
+            for(var i=0; i<selectedAreas.length; i++){
+                $('.report-school-area').append('<li>'+selectedAreas[i]+'</li>')
+            }
+        }
+
         if(selectedOptions.length === 0){
             $('.teachers-section').hide()
         }else{

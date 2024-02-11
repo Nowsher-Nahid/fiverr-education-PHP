@@ -229,6 +229,13 @@ $tests = $get_report[0]['tests'];
                 <ul class="report-student-info"> </ul>
               </div>
 
+              <div class="form-group area-section">
+                <h4 class="mb-3">School Area :</h4>
+                <ul class="report-school-area">
+                  <li><?php echo $area ?></li>
+                </ul>
+              </div>
+
               <div class="form-group teachers-section">
                 <h4 class="mb-3">Teachers :</h4>
                 <ul class="report-teachers"> </ul>
