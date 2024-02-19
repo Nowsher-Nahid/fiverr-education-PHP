@@ -52,12 +52,15 @@ $('#student').change(function(){
     $("#addTeacher").click(function () {
       var addedTeacher = $("#addedTeacher").val();
       var addedTeacherGender = $("#addedTeacherGender").val();
+      var addedTeacherEmail = $("#addedTeacherEmail").val();
       if(addedTeacherGender == ""){
         Swal.fire("Warning!", "Select a gender!", "error");
+      }else if(addedTeacherEmail == ""){
+        Swal.fire("Warning!", "Enter an email!", "error");
       }else{
-        var TeacherAndGender = addedTeacher+"##"+addedTeacherGender;
-        if (TeacherAndGender && !selectedOptions.includes(TeacherAndGender)) {
-          selectedOptions.push(TeacherAndGender);
+        var TeacherGenderEmail = addedTeacher+"##"+addedTeacherGender+"##"+addedTeacherEmail;
+        if (TeacherGenderEmail && !selectedOptions.includes(TeacherGenderEmail)) {
+          selectedOptions.push(TeacherGenderEmail);
           updateSelectedOptionsList();
         }else{
           Swal.fire("Warning!", "This teacher is already added!", "error");
@@ -65,6 +68,7 @@ $('#student').change(function(){
       }
       $("#addedTeacher").val("");
       $("#addedTeacherGender").val("");
+      $("#addedTeacherEmail").val("");
     });
 
     // Handle select change event
@@ -80,7 +84,6 @@ $('#student').change(function(){
 
     // Remove Option button click event
     $(document).on("click", ".remove-teacher-btn", function () {
-      
       var optionToRemove = $(this).parent().attr('data-id').trim();
       var index = selectedOptions.indexOf(optionToRemove);
       if (index !== -1) {
@@ -99,9 +102,13 @@ $('#student').change(function(){
         var splitData = selectedOptions[i].split('##');
         var name = splitData[0];
         var gender = splitData[1];
+        var email = splitData[2];
         var name_gender = name.replace(/ /g,"__")+"__"+gender;
-        var setDataID = name+'##'+gender;
-        $("#selectedOptionsList").append("<li data-id='"+setDataID+"'>" + name + " <i class='fas fa-trash text-danger ml-2 remove-teacher-btn'></i></li>");
+        var name_gender_email = name.replace(/ /g,"__")+"__"+gender+"__"+email;
+        // var setDataID = name+'##'+gender;
+        var setDataID = name+'##'+gender+'##'+email;
+        var nameEmail = name+" (Email: "+email+")";
+        $("#selectedOptionsList").append("<li data-id='"+setDataID+"'>" + nameEmail + " <i class='fas fa-trash text-danger ml-2 remove-teacher-btn'></i></li>");
         $("#userSelect").append("<option value='"+name_gender+"'>" + name + " </option>");
       }
     }

@@ -7,7 +7,6 @@ include('includes/navbar.php');
 	  <div class="row justify-content-center">
 	    <div class="col-md-12">
 	      <div class="form-container">
-	        <!-- <form id="multiStepForm"> -->
 	          <!-- Step 1 -->
 	          <div class="step active" data-step="1">
 	            <h2 class="mb-4">Step 1 : Student Information</h2>
@@ -86,9 +85,121 @@ include('includes/navbar.php');
 	            </div>
 	          </div>
 
-	          <!-- Step 2 -->
-	          <div class="step" data-step="2">
-	            <h2 class="mb-4">Step 2 : Teachers</h2>
+			<!-- step 2 -->
+			<div class="step" data-step="2">
+	            <h2 class="mb-4">Step 2 : Strengths and difficulties</h2>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label for="">Selected student</label>
+								<!-- Name is coming from step.js on clicking starting tool -->
+								<input type="text" class="form-control student-name" readonly>
+							</div>
+							<div class="form-group">
+								<label for="">Enter students strength</label>
+								<div class="d-flex">
+									<input type="text" class="form-control" id="addedStrength" placeholder="Text input">
+									<button type="button" id="addStrength" class="btn btn-secondary">Add</button>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="">Enter students difficulties</label>
+								<div class="d-flex">
+									<input type="text" class="form-control" id="addedDifficulties" placeholder="Text input">
+									<button type="button" id="addDifficulties" class="btn btn-secondary">Add</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 text-center avatar-image">
+							<img class="boy-avatar d-none" src="assets/img/avatar.png" alt="Image" width="140">
+			         		<img class="girl-avatar d-none" src="assets/img/avatar-girl.jpg" alt="Image" width="140">
+						</div>
+					</div>
+				</div>
+	            
+				<div class="row mt-4">
+					<div class="col-md-6">
+						<!-- Selected strength Section -->
+						<div class="selected-strengths">
+							<h3>Selected strengths:</h3>
+							<ul id="selectedStrengthsList"></ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<!-- Selected difficulties Section -->
+						<div class="selected-difficulties">
+							<h3>Selected difficulties:</h3>
+							<ul id="selectedDifficultiesList"></ul>
+						</div>
+					</div>
+				</div>
+
+		        <div class="text-center both-btn">
+	            	<button type="button" class="btn btn-secondary prev mr-2 two-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 two-next">Next Step</button>
+	            </div>
+	        </div>
+
+			<!-- Step 3 -->
+			<div class="step" data-step="3">
+	            <h2 class="mb-4">Step 3 : Supports</h2>
+	            <div class="form-group">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label for="">Selected student</label>
+								<!-- Name is coming from step.js on clicking starting tool -->
+								<input type="text" class="form-control student-name" readonly>
+							</div>
+							<div class="form-group">
+								<label for="">Enter students need for support 1</label>
+								<div class="d-flex">
+									<input type="text" class="form-control" id="addedSupportOne" placeholder="Text input">
+									<button type="button" id="addSupportOne" class="btn btn-secondary">Add</button>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="">Enter students need for support 2</label>
+								<div class="d-flex">
+									<input type="text" class="form-control" id="addedSupportTwo" placeholder="Text input">
+									<button type="button" id="addSupportTwo" class="btn btn-secondary">Add</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 text-center avatar-image">
+							<img class="boy-avatar d-none" src="assets/img/avatar.png" alt="Image" width="140">
+			         		<img class="girl-avatar d-none" src="assets/img/avatar-girl.jpg" alt="Image" width="140">
+						</div>
+					</div>
+				</div>
+	            
+				<div class="row mt-4">
+					<div class="col-md-6">
+						<!-- Selected strength Section -->
+						<div class="selected-support-one">
+							<h3>Support 1:</h3>
+							<ul id="selectedSupportOneList"></ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<!-- Selected difficulties Section -->
+						<div class="selected-support-two">
+							<h3>Support 2:</h3>
+							<ul id="selectedSupportTwoList"></ul>
+						</div>
+					</div>
+				</div>
+
+	            <div class="text-center both-btn">
+	            	<button type="button" class="btn btn-secondary prev mr-2 three-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 three-next">Next Step</button>
+	            </div>
+	        </div>
+
+	          <!-- Step 4 -->
+	          <div class="step" data-step="4">
+	            <h2 class="mb-4">Step 4 : Teachers</h2>
 				<div class="form-group">
 		            <label for="selectedOption">Teacher</label>
 		            <select class="form-control" id="selectedOption">
@@ -98,8 +209,9 @@ include('includes/navbar.php');
 						foreach($get_teachers as $teacher){
 						$teacher_full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
 						$teacher_gender = $teacher['vd_user_sex'];
+						$teacher_email = $teacher['vd_user_email'];
 						?>
-						<option value="<?php echo $teacher_full_name."##".$teacher_gender ?>"><?php echo $teacher_full_name ?></option>
+						<option value="<?php echo $teacher_full_name."##".$teacher_gender."##".$teacher_email ?>"><?php echo $teacher_full_name ?></option>
 						<?php } ?>
 		            </select>
 		        </div>
@@ -107,17 +219,20 @@ include('includes/navbar.php');
 	              <label for="addedGoal">Enter further person</label>
 				  <div class="further-person">
 					<div class="row">
-						<div class="col-md-5">
-							<input type="text" class="form-control" id="addedTeacher" placeholder="Text input">
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="addedTeacher" placeholder="Enter name">
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-3">
 							<select class="form-control" id="addedTeacherGender">
 								<option value="">Select gender</option>
 								<option value="m">Male</option>
 								<option value="w">Female</option>
 							</select>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-4">
+							<input type="email" class="form-control" id="addedTeacherEmail" placeholder="Enter email">
+						</div>
+						<div class="col-md-1">
 							<button type="button" id="addTeacher" class="btn btn-secondary w-100">Add</button>
 						</div>
 					</div>
@@ -130,16 +245,14 @@ include('includes/navbar.php');
 		          <ul id="selectedOptionsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2 two-prev">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 two-next">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 four-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 four-next">Next Step</button>
 	            </div>
 	          </div>
 
-	          <!-- Repeat the above HTML block for Steps 3 through 8 -->
-
-	          <!-- Step 3 -->
-	          <div class="step" data-step="3">
-	            <h2 class="mb-4">Step 3 : School Area</h2>
+	          <!-- Step 5 -->
+	          <div class="step" data-step="5">
+	            <h2 class="mb-4">Step 5 : School Area</h2>
 	            <div class="form-group">
 		            <label for="selectedArea">School Area</label>
 		            <select class="form-control" id="selectedArea">
@@ -175,35 +288,39 @@ include('includes/navbar.php');
 		          <ul id="selectedAreaList"></ul>
 		        </div>
 	            <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2 three-prev">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 next-three three-next">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 five-prev">Previous Step</button>
+					<!-- next-five class (function : student.js) is for showing data in step 6 -->
+	            	<button type="button" class="btn btn-primary next ml-2 next-five five-next">Next Step</button>
 	            </div>
 	          </div>
 
-	          <!-- Repeat the above HTML block for Steps 4 through 8 -->
-
-	          <!-- Step 4 -->
-	          <div class="step" data-step="4">
-	            <h2 class="mb-4">Step 4 : Student Details</h2>
-				<div class="form-group">
-					<div class="row">
-						<div class="col-md-6">
-							<label for="">Selected student</label>
-							<input type="text" class="form-control selected-student" readonly>
+	          <!-- Step 6 -->
+	          <div class="step" data-step="6">
+	            <h2 class="mb-4">Step 6 : Student Details</h2>
+				<div class="row">
+					<div class="col-md-9">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<label for="">Selected student</label>
+									<input type="text" class="form-control selected-student" readonly>
+								</div>
+								<div class="col-md-6">
+									<label for="">Selected school area</label>
+									<input type="text" class="form-control selected-area" readonly>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-6">
-							<label for="">Selected school area</label>
-							<input type="text" class="form-control selected-area" readonly>
+						<div class="form-group">
+							<label for="selectedTestData">Select relevant test data</label>
+							<select class="form-control" id="selectedTestData"></select>
 						</div>
 					</div>
-					
+					<div class="col-md-3 text-center avatar-image">
+						<img class="boy-avatar d-none" src="assets/img/avatar.png" alt="Image" width="140">
+						<img class="girl-avatar d-none" src="assets/img/avatar-girl.jpg" alt="Image" width="140">
+					</div>
 				</div>
-	            <div class="form-group">
-		            <label for="selectedTestData">School relevant test data</label>
-		            <select class="form-control" id="selectedTestData">
-						
-		            </select>
-		        </div>
 
 				<!-- Selected Options Section -->
 		        <div class="selected-options">
@@ -212,16 +329,14 @@ include('includes/navbar.php');
 		        </div>
 
 	            <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2 four-prev">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 four-next">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 six-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 six-next">Next Step</button>
 	            </div>
 	          </div>
 
-	          <!-- Repeat the above HTML block for Steps 5 through 8 -->
-
-	          <!-- Step 5 -->
-	          <div class="step" data-step="5">
-	            <h2 class="mb-4">Step 5 : Task Assignment</h2>
+	          <!-- Step 7 -->
+	          <div class="step" data-step="7">
+	            <h2 class="mb-4">Step 7 : Task Assignment</h2>
 				<form id="taskForm">
 					<div class="form-group">
 						<div class="form-check form-check-inline">
@@ -277,16 +392,19 @@ include('includes/navbar.php');
 				</div>
 
 				<div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2 five-prev">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 five-next">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 seven-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 seven-next">Next Step</button>
 	            </div>
 	          </div>
 
-	          <!-- Repeat the above HTML block for Steps 6 through 8 -->
-
-	          <!-- Step 6 -->
-	          <div class="step" data-step="6">
-	            <h2 class="mb-4">Step 6 : Goals</h2>
+	          <!-- Step 8 -->
+	          <div class="step" data-step="8">
+	            <h2 class="mb-4">Step 8.a : Goals</h2>
+				<div class="form-group">
+					<label for="">Selected need for support 1</label>
+					<!-- goal-support-one class value comes from step.js -->
+					<input type="text" class="form-control goal-support-one" readonly>
+				</div>
 	            <div class="form-group">
 		            <label for="selectedGoal">Select aimed goals</label>
 		            <select class="form-control" id="selectedGoal">
@@ -314,16 +432,56 @@ include('includes/navbar.php');
 		          <ul id="selectedGoalsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2 six-prev">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 six-next">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 eight-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 eight-next">Next Step</button>
 	            </div>
 	          </div>
 
-	          <!-- Step 7 -->
-	          <div class="step" data-step="7">
-	            <h2 class="mb-4">Step 7 : Actions</h2>
+			  <!-- Step 9 -->
+	          <div class="step" data-step="9">
+	            <h2 class="mb-4">Step 8.b : Goals</h2>
 				<div class="form-group">
-		            <label for="selectedGoal">Actions</label>
+					<label for="">Selected need for support 2</label>
+					<!-- goal-support-two class value comes from step.js -->
+					<input type="text" class="form-control goal-support-two" readonly>
+				</div>
+	            <div class="form-group">
+		            <label for="selectedGoalb">Select aimed goals</label>
+		            <select class="form-control" id="selectedGoalb">
+						<option value="">Select goal</option>
+						<?php 
+						$get_goals = $crudObj->dynamic_query('SELECT * FROM vd_goal WHERE created_by = "'.$user_id.'"');
+						foreach($get_goals as $goal){
+						?>
+						<option value="<?php echo $goal['goal'] ?>"><?php echo $goal['goal'] ?></option>
+						<?php } ?>
+
+		            </select>
+		        </div>
+	            <div class="form-group">
+	              <label for="addedGoalb">Enter further goal</label>
+				  <div class="further-person d-flex">
+				  	<input type="text" class="form-control" id="addedGoalb" placeholder="Text input">
+					<button type="button" id="addGoalb" class="btn btn-secondary">Add</button>
+				  </div>
+	            </div>
+	            
+		        <!-- Selected Options Section -->
+		        <div class="selected-options">
+		          <h3>Selected goals:</h3>
+		          <ul id="selectedGoalsListb"></ul>
+		        </div>
+		        <div class="text-center both-btn">
+	            	<button type="button" class="btn btn-secondary prev mr-2 nine-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 nine-next">Next Step</button>
+	            </div>
+	          </div>
+
+	          <!-- Step 10 -->
+	          <div class="step" data-step="10">
+	            <h2 class="mb-4">Step 10.a : Actions</h2>
+				<div class="form-group">
+		            <label for="selectedAction">Actions</label>
 		            <select class="form-control" id="selectedAction">
 						<option value="">Select action</option>
 						<?php 
@@ -349,13 +507,13 @@ include('includes/navbar.php');
 		          <ul id="selectedActionsList"></ul>
 		        </div>
 		        <div class="text-center both-btn">
-	            	<button type="button" class="btn btn-secondary prev mr-2 seven-prev">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 next-seven seven-next">Next Step</button>
+	            	<button type="button" class="btn btn-secondary prev mr-2 ten-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 next-ten ten-next">Next Step</button>
 	            </div>
 	          </div>
 
 	          <!-- Step 8 -->
-	          <div class="step" data-step="8">
+	          <div class="step" data-step="">
 	            <h2>Report / Summary</h2>
 				<div class="image-container">
 					<div class="user-info">
@@ -439,7 +597,6 @@ include('includes/navbar.php');
 	            </div>
 	          </div>
 
-	        <!-- </form> -->
 	      </div>
 	    </div>
 	  </div>

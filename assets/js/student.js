@@ -1,5 +1,5 @@
     
-    $(".next-three").click(function(){
+    $(".next-five").click(function(){
         var selectedStudent = $('#student').val()
         var studentData = selectedStudent.split("#")
         var studentID = studentData[0]

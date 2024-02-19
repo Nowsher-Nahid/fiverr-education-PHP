@@ -19,6 +19,9 @@ if($filename == 'planning-tools.php'){
 ?>
 <?php $currentDateTime = date("Y-m-dH:i:s"); ?>
 <script src="assets/js/teacher.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/strength.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/difficulty.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/support.js?version=<?php echo $currentDateTime ?>"></script>
 <script src="assets/js/area.js?version=<?php echo $currentDateTime ?>"></script>
 <script src="assets/js/student.js?version=<?php echo $currentDateTime ?>"></script>
 <script src="assets/js/goal.js?version=<?php echo $currentDateTime ?>"></script>

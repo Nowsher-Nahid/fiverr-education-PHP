@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     var userDataArray = [];
 
-    $(".next-seven").click(function(){
+    $(".next-ten").click(function(){
         var selectedStudent = $('#student').val()
         var studentData = selectedStudent.split("#")
         var studentID = studentData[0]

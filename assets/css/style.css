@@ -74,6 +74,9 @@ body {
     max-height: 40px;
     margin-right: 20px;
 }
+.avatar-image {
+  margin-top: 30px;
+}
 /* task assignment */
 .user-box {
   background-color: #f8f9fa;

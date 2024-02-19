@@ -30,9 +30,6 @@ $(".area-alert").hide();
     // Remove Option button click event
     $(document).on("click", ".remove-option-btn", function () {
       $(".area-alert").hide();
-      $('#selectedArea').val("");
-      $('#addedArea').val("");
-      // console.log($(this).parent().text())
       var optionToRemove = $(this).parent().text().trim();
       var index = selectedAreas.indexOf(optionToRemove);
       if (index !== -1) {
