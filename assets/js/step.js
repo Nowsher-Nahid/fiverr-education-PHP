@@ -120,7 +120,7 @@ $(document).ready(function () {
       $(".step[data-step='7']").removeClass('active').hide();
       $(".step[data-step='8']").addClass('active').show();
       var supportOne = selectedSupportOneList[0];
-      $(".goal-support-one").val(supportOne);
+      $(".set-support-one").val(supportOne);
     }
   })
   $('.seven-prev').click(function(){
@@ -135,7 +135,7 @@ $(document).ready(function () {
     }else{
       if(selectedSupportTwoList.length > 0){
         var supportTwo = selectedSupportTwoList[0];
-        $(".goal-support-two").val(supportTwo);
+        $(".set-support-two").val(supportTwo);
         $(".step[data-step='8']").removeClass('active').hide();
         $(".step[data-step='9']").addClass('active').show();
       }else{
@@ -163,13 +163,20 @@ $(document).ready(function () {
     $(".step[data-step='8']").addClass('active').show();
   })
 
-  // TEN : Actions  -------------------------------------------------------------------------------------------
+  // TEN : Actions (9a)  -------------------------------------------------------------------------------------------
   $('.ten-next').click(function(){
     if(selectedActions.length === 0){
       Swal.fire("Error!", "Please select or enter actions!", "error");
     }else{
-      $(".step[data-step='10']").removeClass('active').hide();
-      $(".step[data-step='11']").addClass('active').show();
+      if(selectedSupportTwoList.length > 0){
+        // var supportTwo = selectedSupportTwoList[0];
+        // $(".set-support-two").val(supportTwo);
+        $(".step[data-step='10']").removeClass('active').hide();
+        $(".step[data-step='11']").addClass('active').show();
+      }else{
+        $(".step[data-step='10']").removeClass('active').hide();
+        $(".step[data-step='12']").addClass('active').show();
+      }
     }
   })
   $('.ten-prev').click(function(){
@@ -181,6 +188,35 @@ $(document).ready(function () {
       $(".step[data-step='9']").addClass('active').show();
     }
   })
+
+// ELEVEN : Actions (9b)  -------------------------------------------------------------------------------------------
+$('.eleven-next').click(function(){
+  if(selectedActionsb.length === 0){
+    Swal.fire("Error!", "Please select or enter actions!", "error");
+  }else{
+    $(".step[data-step='11']").removeClass('active').hide();
+    $(".step[data-step='12']").addClass('active').show();
+  }
+})
+$('.eleven-prev').click(function(){
+  $(".step[data-step='11']").removeClass('active').hide();
+  $(".step[data-step='10']").addClass('active').show();
+})
+
+// TWELVE : Compensation -------------------------------------------------------------------------------------------
+$('.twelve-next').click(function(){
+  $(".step[data-step='12']").removeClass('active').hide();
+  $(".step[data-step='13']").addClass('active').show();
+})
+$('.twelve-prev').click(function(){
+  if(selectedActionsb.length === 0){
+    $(".step[data-step='12']").removeClass('active').hide();
+    $(".step[data-step='10']").addClass('active').show();
+  }else{
+    $(".step[data-step='12']").removeClass('active').hide();
+    $(".step[data-step='11']").addClass('active').show();
+  }
+})
 
   // EDIT \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   // ONE : Teachers -------------------------------------------------------------------------------------------

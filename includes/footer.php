@@ -27,6 +27,7 @@ if($filename == 'planning-tools.php'){
 <script src="assets/js/goal.js?version=<?php echo $currentDateTime ?>"></script>
 <script src="assets/js/action.js?version=<?php echo $currentDateTime ?>"></script>
 <script src="assets/js/task-asignment.js?version=<?php echo $currentDateTime ?>"></script>
+<script src="assets/js/compensation.js?version=<?php echo $currentDateTime ?>"></script>
 <script src="assets/js/report.js?version=<?php echo $currentDateTime ?>"></script>
 <?php } ?>
 

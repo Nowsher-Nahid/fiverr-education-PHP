@@ -399,11 +399,11 @@ include('includes/navbar.php');
 
 	          <!-- Step 8 -->
 	          <div class="step" data-step="8">
-	            <h2 class="mb-4">Step 8.a : Goals</h2>
+	            <h2 class="mb-4">Step 8(a) : Goals</h2>
 				<div class="form-group">
 					<label for="">Selected need for support 1</label>
 					<!-- goal-support-one class value comes from step.js -->
-					<input type="text" class="form-control goal-support-one" readonly>
+					<input type="text" class="form-control set-support-one" readonly>
 				</div>
 	            <div class="form-group">
 		            <label for="selectedGoal">Select aimed goals</label>
@@ -439,11 +439,11 @@ include('includes/navbar.php');
 
 			  <!-- Step 9 -->
 	          <div class="step" data-step="9">
-	            <h2 class="mb-4">Step 8.b : Goals</h2>
+	            <h2 class="mb-4">Step 8(b) : Goals</h2>
 				<div class="form-group">
 					<label for="">Selected need for support 2</label>
 					<!-- goal-support-two class value comes from step.js -->
-					<input type="text" class="form-control goal-support-two" readonly>
+					<input type="text" class="form-control set-support-two" readonly>
 				</div>
 	            <div class="form-group">
 		            <label for="selectedGoalb">Select aimed goals</label>
@@ -477,9 +477,14 @@ include('includes/navbar.php');
 	            </div>
 	          </div>
 
-	          <!-- Step 10 -->
-	          <div class="step" data-step="10">
-	            <h2 class="mb-4">Step 10.a : Actions</h2>
+	        <!-- Step 10 -->
+	        <div class="step" data-step="10">
+	            <h2 class="mb-4">Step 9(a) : Actions</h2>
+				<div class="form-group">
+					<label for="">Selected need for support 1</label>
+					<!-- goal-support-one class value comes from step.js -->
+					<input type="text" class="form-control set-support-one" readonly>
+				</div>
 				<div class="form-group">
 		            <label for="selectedAction">Actions</label>
 		            <select class="form-control" id="selectedAction">
@@ -508,12 +513,180 @@ include('includes/navbar.php');
 		        </div>
 		        <div class="text-center both-btn">
 	            	<button type="button" class="btn btn-secondary prev mr-2 ten-prev">Previous Step</button>
-	            	<button type="button" class="btn btn-primary next ml-2 next-ten ten-next">Next Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 ten-next">Next Step</button>
 	            </div>
-	          </div>
+	        </div>
 
-	          <!-- Step 8 -->
-	          <div class="step" data-step="">
+			<!-- Step 11 -->
+	        <div class="step" data-step="11">
+	            <h2 class="mb-4">Step 9(b) : Actions</h2>
+				<div class="form-group">
+					<label for="">Selected need for support 2</label>
+					<!-- goal-support-one class value comes from step.js -->
+					<input type="text" class="form-control set-support-two" readonly>
+				</div>
+				<div class="form-group">
+		            <label for="selectedActionb">Actions</label>
+		            <select class="form-control" id="selectedActionb">
+						<option value="">Select action</option>
+						<?php 
+						$get_actions = $crudObj->dynamic_query('SELECT * FROM vd_action WHERE created_by = "'.$user_id.'"');
+						foreach($get_actions as $action){
+						?>
+						<option value="<?php echo $action['action'] ?>"><?php echo $action['action'] ?></option>
+						<?php } ?>
+
+		            </select>
+		        </div>
+	            <div class="form-group">
+	              <label for="addedActionb">Enter further action</label>
+				  <div class="further-person d-flex">
+				  	<input type="text" class="form-control" id="addedActionb" placeholder="Text input">
+					<button type="button" id="addActionb" class="btn btn-secondary">Add</button>
+				  </div>
+	            </div>
+	            
+		         <!-- Selected Options Section -->
+		        <div class="selected-options">
+		          <h3>Selected actions:</h3>
+		          <ul id="selectedActionsListb"></ul>
+		        </div>
+		        <div class="text-center both-btn">
+	            	<button type="button" class="btn btn-secondary prev mr-2 eleven-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 eleven-next">Next Step</button>
+	            </div>
+	        </div>
+
+			<!-- Step 12 -->
+	        <div class="step" data-step="12">
+	            <h2 class="mb-4">Step 10 : Compensation</h2>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label for="">Selected student</label>
+								<!-- Name is coming from step.js on clicking starting tool -->
+								<input type="text" class="form-control student-name" readonly>
+							</div>
+							<div class="form-group">
+								<label for="">Enter form of compensation</label>
+								<div class="d-flex">
+									<input type="text" class="form-control" id="addedCompensation" placeholder="Text input">
+									<button type="button" id="addCompensation" class="btn btn-secondary">Add</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 text-center avatar-image">
+							<img class="boy-avatar d-none" src="assets/img/avatar.png" alt="Image" width="140">
+			         		<img class="girl-avatar d-none" src="assets/img/avatar-girl.jpg" alt="Image" width="140">
+						</div>
+					</div>
+				</div>
+	            
+				<div class="selected-compensation">
+					<h3>Selected compensation:</h3>
+					<ul id="selectedCompensationsList"></ul>
+				</div>
+				
+		        <div class="text-center both-btn">
+	            	<button type="button" class="btn btn-secondary prev mr-2 twelve-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 twelve-next">Next Step</button>
+	            </div>
+	        </div>
+
+			<!-- Step 13 -->
+	        <div class="step" data-step="13">
+	            <h2 class="mb-4">Step 11(a) : Teachers Distribution</h2>
+				<div class="form-group">
+					<label for="">Selected need for support 1</label>
+					<!-- goal-support-one class value comes from step.js -->
+					<input type="text" class="form-control set-support-one" readonly>
+				</div>
+				<div class="form-group">
+		            <label for="selectedTeacherOne">Distribute person responsible</label>
+		            <select class="form-control" id="selectedTeacherOne">
+						<option value="">Select teacher</option>
+						<?php 
+						$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
+						foreach($get_teachers as $teacher){
+						$teacher_full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+						$teacher_gender = $teacher['vd_user_sex'];
+						$teacher_email = $teacher['vd_user_email'];
+						?>
+						<option value="<?php echo $teacher_full_name."##".$teacher_gender."##".$teacher_email ?>"><?php echo $teacher_full_name ?></option>
+						<?php } ?>
+		            </select>
+		        </div>
+				<!-- Selected Options Section -->
+		        <div class="selected-teacher-one">
+		          <h3>Selected teacher:</h3>
+		          <ul id="selectedTeacherListOne"></ul>
+		        </div>
+				<div class="form-group">
+		            <label for="selectedTeachersOne">Distribute persons as member</label>
+		            <select class="form-control" id="selectedTeachersOne">
+						<option value="">Select teacher</option>
+						<?php 
+						$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
+						foreach($get_teachers as $teacher){
+						$teacher_full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+						$teacher_gender = $teacher['vd_user_sex'];
+						$teacher_email = $teacher['vd_user_email'];
+						?>
+						<option value="<?php echo $teacher_full_name."##".$teacher_gender."##".$teacher_email ?>"><?php echo $teacher_full_name ?></option>
+						<?php } ?>
+		            </select>
+		        </div>
+				<!-- Selected Options Section -->
+		        <div class="selected-teachers-one">
+		          <h3>Selected teachers:</h3>
+		          <ul id="selectedTeachersListOne"></ul>
+		        </div>
+				<div class="form-group">
+					<label>Enter duty</label>
+					<div class="d-flex">
+						<input type="text" class="form-control" id="addedDutyOne" placeholder="Text input">
+						<button type="button" id="addDutyOne" class="btn btn-secondary">Add</button>
+					</div>
+				</div>
+				<!-- Selected Options Section -->
+		        <div class="selected-duties-one">
+		          <h3>Selected duty:</h3>
+		          <ul id="selectedDutyListOne"></ul>
+		        </div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="addedOutcomeOne">Set desired outcome 1</label>
+							<input type="text" class="form-control" id="addedOutcomeOne" placeholder="Text input">
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="outcomeDateOne">Set date for outcome 1</label>
+							<input type="date" class="form-control" id="outcomeDateOne">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button type="button" id="addOutcomeOne" class="btn btn-secondary w-100 add-btn">Add</button>
+					</div>
+				</div>
+
+				<!-- Selected Options Section -->
+		        <div class="selected-outcomes-one">
+					<h3>Outcome and Date :</h3>
+		          	<ul id="selectedOutcomesListOne"></ul>
+		        </div>
+
+		        <div class="text-center both-btn">
+	            	<button type="button" class="btn btn-secondary prev mr-2 thirteen-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 thirteen-next">Next Step</button>
+	            </div>
+	        </div>
+
+	          <!-- Step 15 -->
+	          <div class="step" data-step="15">
 	            <h2>Report / Summary</h2>
 				<div class="image-container">
 					<div class="user-info">
