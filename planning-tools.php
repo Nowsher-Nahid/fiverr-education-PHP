@@ -597,7 +597,7 @@ include('includes/navbar.php');
 			<!-- Step 13 -->
 	        <div class="step" data-step="13">
 	            <h2 class="mb-4">Step 11(a) : Teachers Distribution</h2>
-				<div class="form-group">
+				<div class="form-group mb-5">
 					<label for="">Selected need for support 1</label>
 					<!-- goal-support-one class value comes from step.js -->
 					<input type="text" class="form-control set-support-one" readonly>
@@ -618,7 +618,7 @@ include('includes/navbar.php');
 		            </select>
 		        </div>
 				<!-- Selected Options Section -->
-		        <div class="selected-teacher-one">
+		        <div class="selected-teacher-one mb-5">
 		          <h3>Selected teacher:</h3>
 		          <ul id="selectedTeacherListOne"></ul>
 		        </div>
@@ -638,7 +638,7 @@ include('includes/navbar.php');
 		            </select>
 		        </div>
 				<!-- Selected Options Section -->
-		        <div class="selected-teachers-one">
+		        <div class="selected-teachers-one mb-5">
 		          <h3>Selected teachers:</h3>
 		          <ul id="selectedTeachersListOne"></ul>
 		        </div>
@@ -650,7 +650,7 @@ include('includes/navbar.php');
 					</div>
 				</div>
 				<!-- Selected Options Section -->
-		        <div class="selected-duties-one">
+		        <div class="selected-duties-one mb-5">
 		          <h3>Selected duty:</h3>
 		          <ul id="selectedDutyListOne"></ul>
 		        </div>
@@ -674,7 +674,7 @@ include('includes/navbar.php');
 				</div>
 
 				<!-- Selected Options Section -->
-		        <div class="selected-outcomes-one">
+		        <div class="selected-outcomes-one mb-5">
 					<h3>Outcome and Date :</h3>
 		          	<ul id="selectedOutcomesListOne"></ul>
 		        </div>
