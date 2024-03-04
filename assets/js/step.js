@@ -1,21 +1,4 @@
 $(document).ready(function () {
-
-  // var currentStep = 1;
-
-  // // Show the first step initially
-  // $(".step[data-step='" + currentStep + "']").addClass('active');
-
-  // $(".next").click(function () {
-  //   $(".step[data-step='" + currentStep + "']").removeClass('active').hide();
-  //   currentStep++;
-  //   $(".step[data-step='" + currentStep + "']").addClass('active').show();
-  // });
-
-  // $(".prev").click(function () {
-  //   $(".step[data-step='" + currentStep + "']").removeClass('active').hide();
-  //   currentStep--;
-  //   $(".step[data-step='" + currentStep + "']").addClass('active').show();
-  // }); 
   
   // ONE -------------------------------------------------------------------------------------------
   $('.one').click(function(){
@@ -48,7 +31,7 @@ $(document).ready(function () {
   // TWO : Strength and difficulties -------------------------------------------------------------------------------------------
 
   $('.two-next').click(function(){
-    if(selectedStrengths.length === 0 && selectedDifficulties.length === 0){
+    if(selectedStrengths.length === 0 || selectedDifficulties.length === 0){
       Swal.fire("Error!", "Please enter strengths and difficulties!", "error");
     }else{
       $(".step[data-step='2']").removeClass('active').hide();
@@ -62,7 +45,7 @@ $(document).ready(function () {
 
   // THREE : Supports -------------------------------------------------------------------------------------------
   $('.three-next').click(function(){
-    if(selectedSupportOneList.length === 0){
+    if(selectedSupportOne.length === 0){
       Swal.fire("Error!", "Please enter a support in support 1!", "error");
     }else{
       $(".step[data-step='3']").removeClass('active').hide();
@@ -119,7 +102,7 @@ $(document).ready(function () {
     }else{
       $(".step[data-step='7']").removeClass('active').hide();
       $(".step[data-step='8']").addClass('active').show();
-      var supportOne = selectedSupportOneList[0];
+      var supportOne = selectedSupportOne[0];
       $(".set-support-one").val(supportOne);
     }
   })
@@ -133,8 +116,8 @@ $(document).ready(function () {
     if(selectedGoals.length === 0){
       Swal.fire("Error!", "Please select or enter goals!", "error");
     }else{
-      if(selectedSupportTwoList.length > 0){
-        var supportTwo = selectedSupportTwoList[0];
+      if(selectedSupportTwo.length > 0){
+        var supportTwo = selectedSupportTwo[0];
         $(".set-support-two").val(supportTwo);
         $(".step[data-step='8']").removeClass('active').hide();
         $(".step[data-step='9']").addClass('active').show();
@@ -168,9 +151,7 @@ $(document).ready(function () {
     if(selectedActions.length === 0){
       Swal.fire("Error!", "Please select or enter actions!", "error");
     }else{
-      if(selectedSupportTwoList.length > 0){
-        // var supportTwo = selectedSupportTwoList[0];
-        // $(".set-support-two").val(supportTwo);
+      if(selectedSupportTwo.length > 0){
         $(".step[data-step='10']").removeClass('active').hide();
         $(".step[data-step='11']").addClass('active').show();
       }else{
@@ -217,6 +198,52 @@ $('.twelve-prev').click(function(){
     $(".step[data-step='11']").addClass('active').show();
   }
 })
+
+// THIRTEEN : Teachers Distribution (11a)  -------------------------------------------------------------------------------------------
+$('.thirteen-next').click(function(){
+  if(selectedTeacherOne.length === 0 || selectedTeachersOne.length === 0 || selectedDutiesOne.length === 0 || selectedOutcomesOne.length === 0){
+    Swal.fire("Error!", "Please select and enter the form data!", "error");
+  }else{
+    if(selectedSupportTwo.length > 0){
+      $(".step[data-step='13']").removeClass('active').hide();
+      $(".step[data-step='14']").addClass('active').show();
+    }else{
+      $(".step[data-step='13']").removeClass('active').hide();
+      $(".step[data-step='15']").addClass('active').show();
+    }
+  }
+})
+$('.thirteen-prev').click(function(){
+  $(".step[data-step='13']").removeClass('active').hide();
+  $(".step[data-step='12']").addClass('active').show();
+})
+
+// FOURTEEN : Teachers Distribution (11b) -------------------------------------------------------------------------------------------
+$('.fourteen-next').click(function(){
+  if(selectedTeacherTwo.length === 0 || selectedTeachersTwo.length === 0 || selectedDutiesTwo.length === 0 || selectedOutcomesTwo.length === 0){
+    Swal.fire("Error!", "Please select end enter the form data!", "error");
+  }else{
+    $(".step[data-step='14']").removeClass('active').hide();
+    $(".step[data-step='15']").addClass('active').show();
+  }
+})
+$('.fourteen-prev').click(function(){
+  $(".step[data-step='14']").removeClass('active').hide();
+  $(".step[data-step='13']").addClass('active').show();
+})
+
+// FIFTEEN : Report -------------------------------------------------------------------------------------------
+$('.fifteen-prev').click(function(){
+  if(selectedTeacherTwo.length === 0 || selectedTeachersTwo.length === 0 || selectedDutiesTwo.length === 0 || selectedOutcomesTwo.length === 0){
+    $(".step[data-step='15']").removeClass('active').hide();
+    $(".step[data-step='13']").addClass('active').show();
+  }else{
+    $(".step[data-step='15']").removeClass('active').hide();
+    $(".step[data-step='14']").addClass('active').show();
+  }
+})
+
+
 
   // EDIT \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   // ONE : Teachers -------------------------------------------------------------------------------------------

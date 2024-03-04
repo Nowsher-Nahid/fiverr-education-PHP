@@ -1,5 +1,7 @@
-<?php include('includes/header.php') ?>
-<?php include('includes/navbar.php') ?>
+<?php 
+include('includes/header.php');
+include('includes/navbar.php');
+?>
 
 <div class="container">
 	  <div class="row justify-content-center">
@@ -49,8 +51,10 @@
     </div>
 </div>
 
-<?php include('includes/footer.php') ?>
-<?php include('modals/goal-modal.php') ?>
+<?php 
+include('includes/footer.php');
+include('modals/goal-modal.php'); 
+?>
 
 <script>
 

@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link text-light" href="planning-tools.php"><i class="fas fa-tools mr-1"></i> Planning Tools</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="report-list.php"><i class="fas fa-list mr-1"></i> Report List</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-cog mr-1"></i> Settings

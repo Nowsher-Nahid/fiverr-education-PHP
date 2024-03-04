@@ -7,8 +7,9 @@ include('includes/navbar.php');
 	  <div class="row justify-content-center">
 	    <div class="col-md-12">
 	      <div class="form-container">
-	          <!-- Step 1 -->
-	          <div class="step active" data-step="1">
+
+	        <!-- Step 1 -->
+	        <div class="step active" data-step="1">
 	            <h2 class="mb-4">Step 1 : Student Information</h2>
 
 				<div class="form-group mt-4">
@@ -83,7 +84,7 @@ include('includes/navbar.php');
 		        	<div class="text-center">
 	            	<button type="button" class="btn btn-primary next one">Start Planning Tool</button>
 	            </div>
-	          </div>
+	        </div>
 
 			<!-- step 2 -->
 			<div class="step" data-step="2">
@@ -685,8 +686,101 @@ include('includes/navbar.php');
 	            </div>
 	        </div>
 
-	          <!-- Step 15 -->
-	          <div class="step" data-step="15">
+			<!-- Step 14 -->
+	        <div class="step" data-step="14">
+	            <h2 class="mb-4">Step 11(b) : Teachers Distribution</h2>
+				<div class="form-group mb-5">
+					<label for="">Selected need for support 2</label>
+					<!-- goal-support-one class value comes from step.js -->
+					<input type="text" class="form-control set-support-two" readonly>
+				</div>
+				<div class="form-group">
+		            <label for="selectedTeacherTwo">Distribute person responsible</label>
+		            <select class="form-control" id="selectedTeacherTwo">
+						<option value="">Select teacher</option>
+						<?php 
+						$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
+						foreach($get_teachers as $teacher){
+						$teacher_full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+						$teacher_gender = $teacher['vd_user_sex'];
+						$teacher_email = $teacher['vd_user_email'];
+						?>
+						<option value="<?php echo $teacher_full_name."##".$teacher_gender."##".$teacher_email ?>"><?php echo $teacher_full_name ?></option>
+						<?php } ?>
+		            </select>
+		        </div>
+				<!-- Selected Options Section -->
+		        <div class="selected-teacher-two mb-5">
+		          <h3>Selected teacher:</h3>
+		          <ul id="selectedTeacherListTwo"></ul>
+		        </div>
+				<div class="form-group">
+		            <label for="selectedTeachersTwo">Distribute persons as member</label>
+		            <select class="form-control" id="selectedTeachersTwo">
+						<option value="">Select teacher</option>
+						<?php 
+						$get_teachers = $crudObj->dynamic_query('SELECT * FROM vd_user');
+						foreach($get_teachers as $teacher){
+						$teacher_full_name = $teacher['vd_user_1_name'].' '.$teacher['vd_user_2_name'];
+						$teacher_gender = $teacher['vd_user_sex'];
+						$teacher_email = $teacher['vd_user_email'];
+						?>
+						<option value="<?php echo $teacher_full_name."##".$teacher_gender."##".$teacher_email ?>"><?php echo $teacher_full_name ?></option>
+						<?php } ?>
+		            </select>
+		        </div>
+				<!-- Selected Options Section -->
+		        <div class="selected-teachers-two mb-5">
+		          <h3>Selected teachers:</h3>
+		          <ul id="selectedTeachersListTwo"></ul>
+		        </div>
+				<div class="form-group">
+					<label>Enter duty</label>
+					<div class="d-flex">
+						<input type="text" class="form-control" id="addedDutyTwo" placeholder="Text input">
+						<button type="button" id="addDutyTwo" class="btn btn-secondary">Add</button>
+					</div>
+				</div>
+				<!-- Selected Options Section -->
+		        <div class="selected-duties-two mb-5">
+		          <h3>Selected duty:</h3>
+		          <ul id="selectedDutyListTwo"></ul>
+		        </div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="addedOutcomeTwo">Set desired outcome 1</label>
+							<input type="text" class="form-control" id="addedOutcomeTwo" placeholder="Text input">
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="outcomeDateTwo">Set date for outcome 1</label>
+							<input type="date" class="form-control" id="outcomeDateTwo">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button type="button" id="addOutcomeTwo" class="btn btn-secondary w-100 add-btn">Add</button>
+					</div>
+				</div>
+
+				<!-- Selected Options Section -->
+		        <div class="selected-outcomes-two mb-5">
+					<h3>Outcome and Date :</h3>
+		          	<ul id="selectedOutcomesListTwo"></ul>
+		        </div>
+
+		        <div class="text-center both-btn">
+	            	<button type="button" class="btn btn-secondary prev mr-2 fourteen-prev">Previous Step</button>
+	            	<button type="button" class="btn btn-primary next ml-2 fourteen-next">Next Step</button>
+	            </div>
+	        </div>
+
+			<!-- VERY IMPORTANT NOTE : on clicking "thirteen-next" class in step 13 will set data from step 1 to 13. As step 14 is optional so if step 14 is available, then step 14 data will be set in report by "fourteen-next" class -->
+
+	        <!-- Step 15 -->
+	        <div class="step" data-step="15">
 	            <h2>Report / Summary</h2>
 				<div class="image-container">
 					<div class="user-info">
@@ -698,6 +792,26 @@ include('includes/navbar.php');
 				<div class="form-group student-section">
 					<h4 class="mb-3">Student Information :</h4>
 					<ul class="report-student-info"> </ul>
+				</div>
+
+				<div class="form-group strength-section">
+					<h4 class="mb-3">Strengths :</h4>
+					<ul class="report-strength"> </ul>
+				</div>
+
+				<div class="form-group difficulties-section">
+					<h4 class="mb-3">Difficulties :</h4>
+					<ul class="report-difficulties"> </ul>
+				</div>
+
+				<div class="form-group support-one-section">
+					<h4 class="mb-3">Need for support 1 :</h4>
+					<ul class="report-support-one"> </ul>
+				</div>
+
+				<div class="form-group support-two-section">
+					<h4 class="mb-3">Need for support 2 :</h4>
+					<ul class="report-support-two"> </ul>
 				</div>
 
 				<div class="form-group area-section">
@@ -712,7 +826,6 @@ include('includes/navbar.php');
 
 				<div class="form-group">
 					<h4 class="mb-3">Task Assignments :</h4>
-
 					<div class="table-responsive table-section" id="reportStudentTable">
 						<table class="table table-bordered" style="width:100%">
 							<thead>
@@ -721,52 +834,131 @@ include('includes/navbar.php');
 									<th>Task</th>
 								</tr>
 							</thead>
-							<tbody class="table-body" id="userTable">
-								
-							</tbody>
-							
+							<tbody class="table-body" id="userTable"></tbody>
 						</table>
 					</div>
 				</div>
 
-				<div class="form-group goals-section">
-					<h4 class="mb-3">Goals :</h4>
-					<ul class="report-goals"> </ul>
+				<div class="form-group goals-section-one">
+					<!-- <h4 class="mb-3">Goals for support (<span class="set-support-one-text"></span>):</h4> -->
+					<h4 class="mb-3">Support 1 goals :</h4>
+					<ul class="report-goals-one"> </ul>
 				</div>
 
-				<div class="form-group actions-section">
-					<h4 class="mb-3">Actions :</h4>
-					<ul class="report-actions"> </ul>
+				<div class="form-group goals-section-two">
+					<!-- <h4 class="mb-3">Goals for support (<span class="set-support-two-text"></span>):</h4> -->
+					<h4 class="mb-3">Support 2 goals :</h4>
+					<ul class="report-goals-two"> </ul>
+				</div>
+
+				<div class="form-group actions-section-one">
+					<!-- <h4 class="mb-3">Actions for support (<span class="set-support-one-text"></span>):</h4> -->
+					<h4 class="mb-3">Support 1 actions :</h4>
+					<ul class="report-actions-one"> </ul>
+				</div>
+
+				<div class="form-group actions-section-two">
+					<!-- <h4 class="mb-3">Actions for support (<span class="set-support-two-text"></span>):</h4> -->
+					<h4 class="mb-3">Support 2 actions :</h4>
+					<ul class="report-actions-two"> </ul>
+				</div>
+
+				<div class="form-group compensation-section">
+					<h4 class="mb-3">Form of compensation:</h4>
+					<ul class="report-compensation"> </ul>
+				</div>
+
+				<div class="form-group distribution-section-one">
+					<!-- <h4 class="mb-3">Teachers distribution for support (<span class="set-support-one-text"></span>):</h4> -->
+					<h4 class="mb-3">Support 1 teachers distribution :</h4>
+					<div class="table-responsive table-section" id="report-distribution-one">
+						<table class="table table-bordered" style="width:100%">
+							<thead>
+								<tr>
+									<th>Teacher</th>
+									<th>Members</th>
+									<th>Duties</th>
+									<th>Outcomes</th>
+								</tr>
+							</thead>
+							<tbody class="table-body">
+								<tr>
+									<td class="teacher-support-one"></td>
+									<td>
+										<ul class="members-support-one"></ul>
+									</td>
+									<td>
+										<ul class="duties-support-one"></ul>
+									</td>
+									<td>
+										<ul class="outcomes-support-one"></ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="form-group distribution-section-two">
+					<!-- <h4 class="mb-3">Teachers distribution for support (<span class="set-support-two-text"></span>):</h4> -->
+					<h4 class="mb-3">Support 2 teachers distribution :</h4>
+					<div class="table-responsive table-section" id="report-distribution-two">
+						<table class="table table-bordered" style="width:100%">
+							<thead>
+								<tr>
+									<th>Teacher</th>
+									<th>Members</th>
+									<th>Duties</th>
+									<th>Outcomes</th>
+								</tr>
+							</thead>
+							<tbody class="table-body">
+								<tr>
+									<td class="teacher-support-two"></td>
+									<td>
+										<ul class="members-support-two"></ul>
+									</td>
+									<td>
+										<ul class="duties-support-two"></ul>
+									</td>
+									<td>
+										<ul class="outcomes-support-two"></ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 				<div class="row mt-5 no-print">
-					<div class="col-md-5">
+					<!-- <div class="col-md-5">
 						<div class="form-group">
 							<label for="addedOutcome">Set desired student outcome</label>
 							<input type="text" class="form-control" id="addedOutcome" placeholder="Text input">
 						</div>
-					</div>
-					<div class="col-md-5">
+					</div> -->
+					<div class="col-md-10">
 						<div class="form-group">
 							<label for="evaluationDate">Set date to re-evaluate plan</label>
 							<input type="date" class="form-control" id="evaluationDate">
 						</div>
 					</div>
 					<div class="col-md-2">
-						<button type="button" id="addOutcome" class="btn btn-secondary w-100 add-btn">Add</button>
+						<button type="button" id="addEvaluateDate" class="btn btn-secondary w-100 add-btn">Add</button>
 					</div>
 				</div>
 
 				<!-- Selected Options Section -->
 		        <div class="selected-options">
-				<h3 class="mt-4 mb-3">Outcome and Date :</h3>
-		          	<ul id="selectedOutcomesList"></ul>
+				<h3 class="mt-4 mb-3">Re-evaluation Date :</h3>
+		          	<ul id="selectedEvaluateList"></ul>
 		        </div>
 
 	            <div class="text-center both-btn no-print">
-	            	<button type="button" class="btn btn-secondary prev prev-step-eight eight-prev">Previous Step</button>
+	            	<!-- <button type="button" class="btn btn-secondary prev prev-step-eight fifteen-prev">Previous Step</button> -->
+	            	<button type="button" class="btn btn-secondary prev fifteen-prev">Previous Step</button>
 					<a class="text-secondary" href="javascript:void(0)" onclick="printPage()"><i class="fas fa-print"></i></a>
-	            	<button type="button" class="btn btn-success submit save-step-eight">Save</button>
+	            	<button type="button" class="btn btn-success submit save-report">Save</button>
 	            </div>
 	          </div>
 
@@ -781,5 +973,37 @@ include('includes/navbar.php');
 	function printPage(){
 		window.print();
 	}
+</script>
+
+<script>
+	$(".two-next").click(function(){
+		var student = $("#student").val();
+		var splitStudent = student.split("#");
+		var studentID = splitStudent[0];
+
+		var combinedArrays = [studentID,selectedStrengths,selectedDifficulties];
+		var xhr = new XMLHttpRequest();
+    	xhr.open('POST', 'example.php', true);
+    	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    	xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log(xhr.responseText);
+			}
+    	};
+    	xhr.send(JSON.stringify({ arrays: combinedArrays }));
+	})
+	
+	
+    // var combinedArrays = [array1, array2];
+
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', 'generate_pdf.php', true);
+    // xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    // xhr.onreadystatechange = function() {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //         console.log(xhr.responseText);
+    //     }
+    // };
+    // xhr.send(JSON.stringify({ arrays: combinedArrays }));
 </script>
 

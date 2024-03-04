@@ -2,7 +2,8 @@
 require_once('controller/crudFunctions.php');
 $crudObj = new CrudOparation;
 
-$user_id = 4;
+$_SESSION["user_id"] = 4;
+$user_id = $_SESSION["user_id"];
 $where_user = array('ID'=>$user_id);
 $get_user = $crudObj->select_record('vd_user_sex,vd_user_1_name,vd_user_2_name',$where_user,'vd_user');
 $full_name = $get_user[0]['vd_user_1_name'].' '.$get_user[0]['vd_user_2_name'];

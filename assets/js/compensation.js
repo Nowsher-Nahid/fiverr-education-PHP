@@ -7,7 +7,7 @@ $("#addCompensation").click(function () {
         selectedCompensations.push(addedCompensation);
         updateSelectedCompensationList();
     }else{
-        Swal.fire("Warning!", "This gompensation is already added!", "error");
+        Swal.fire("Warning!", "This compensation is already added!", "error");
     }
     $("#addedCompensation").val("")
 });
