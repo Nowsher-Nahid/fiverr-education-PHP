@@ -196,7 +196,7 @@ public function countRows($table){
 
         }
 
-        public function send_mail($receiverName,$receiverEmail,$subject,$messagebody,$replTo="",$replyToName="",$filename=""){
+        public function send_mail($receiverName,$receiverEmail,$subject,$messagebody,$replTo="",$replyToName="",$filename_pdf,$filename_ics){
           
             $host = "mail.dstudio.asia";
             $username= "career@dstudio.asia";
@@ -230,6 +230,11 @@ public function countRows($table){
             $mail->SetFrom($username, $replyToName);
 
             $mail->Subject = $subject;
+
+            // Add the PDF attachment
+            $mail->addAttachment($filename_pdf, 'sample.pdf');
+            $mail->addAttachment($filename_ics, 'sample.ics');
+            
 
             $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!'; // optional - MsgHTML will create an alternate automatically
 

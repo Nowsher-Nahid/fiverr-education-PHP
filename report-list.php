@@ -76,7 +76,7 @@ $get_reports = $crudObj->dynamic_query('SELECT * FROM vd_report WHERE '.$conditi
                                 <a href="pdf.php?id=<?php echo $data['id'] ?>" target="_blank">
                                     <button type="button" class="btn btn-sm btn-primary mx-2"><i class="fas fa-share-square"></i></button>
                                 </a>
-                                <button class="btn btn-sm btn-info"><i class="fas fa-envelope"></i></button>
+                                <button type="button" class="btn btn-sm btn-info" onclick="send_mail(<?php echo $data['id'] ?>)"><i class="fas fa-envelope"></i></button>
                             </td>
                         </tr>
                         <?php } ?>
@@ -89,3 +89,18 @@ $get_reports = $crudObj->dynamic_query('SELECT * FROM vd_report WHERE '.$conditi
 </div>
 
 <?php include('includes/footer.php') ?>
+
+<script>
+    function send_mail(id){
+        $.ajax({
+            url: "actions/action-email.php",
+            method: "POST",
+            data: {id:id},
+            crossDomain: true,
+            cache: false,
+            success: function(data) {
+                // Swal.fire("Done!", "Email has been sent!", "success");
+            }
+        });
+    }
+</script>
