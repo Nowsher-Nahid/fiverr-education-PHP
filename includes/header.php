@@ -8,20 +8,6 @@ $where_user = array('ID'=>$user_id);
 $get_user = $crudObj->select_record('vd_user_sex,vd_user_1_name,vd_user_2_name',$where_user,'vd_user');
 $full_name = $get_user[0]['vd_user_1_name'].' '.$get_user[0]['vd_user_2_name'];
 $user_gender = $get_user[0]['vd_user_sex'];
-
-// if(isset($_SESSION['user_email']) && $_SESSION['user_type']=="Admin") {
-// 	$user_id = $_SESSION['user_id'];
-// 	$user_fname = $_SESSION['user_fname'];
-// 	$user_lname = $_SESSION['user_lname'];
-// 	$user_full_name = $user_fname." ".$user_lname;
-// 	$user_email = $_SESSION['user_email'];
-// 	$user_type = $_SESSION['user_type'];
-// 	$user_img = $_SESSION['user_img'];
-	
-// }else{
-//   echo '<script>window.location.href = "index.php";</script>';
-// 	exit;
-// }
 ?>
 
 <!DOCTYPE html>

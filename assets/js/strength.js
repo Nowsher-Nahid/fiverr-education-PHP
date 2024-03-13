@@ -24,8 +24,8 @@ $(document).on("click", ".remove-option-btn", function () {
 
 // Update the selected options list
 function updateSelectedStrengthsList() {
-$("#selectedStrengthsList").empty();
-for (var i = 0; i < selectedStrengths.length; i++) {
-    $("#selectedStrengthsList").append("<li>" + selectedStrengths[i] + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
-}
+    $("#selectedStrengthsList").empty();
+    for (var i = 0; i < selectedStrengths.length; i++) {
+        $("#selectedStrengthsList").append("<li>" + selectedStrengths[i] + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
+    }
 }

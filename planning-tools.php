@@ -957,9 +957,10 @@ include('includes/navbar.php');
 	            <div class="text-center both-btn no-print">
 	            	<!-- <button type="button" class="btn btn-secondary prev prev-step-eight fifteen-prev">Previous Step</button> -->
 	            	<button type="button" class="btn btn-secondary prev fifteen-prev">Previous Step</button>
-					<a class="text-secondary" href="javascript:void(0)" onclick="printPage()"><i class="fas fa-print"></i></a>
+					<a class="text-secondary mx-2" href="javascript:void(0)" onclick="printPage()"><i class="fas fa-print"></i></a>
 	            	<button type="button" class="btn btn-success submit save-report">Save</button>
 	            </div>
+
 	          </div>
 
 	      </div>
@@ -976,34 +977,21 @@ include('includes/navbar.php');
 </script>
 
 <script>
-	$(".two-next").click(function(){
-		var student = $("#student").val();
-		var splitStudent = student.split("#");
-		var studentID = splitStudent[0];
+	// $(".two-next").click(function(){
+	// 	var student = $("#student").val();
+	// 	var splitStudent = student.split("#");
+	// 	var studentID = splitStudent[0];
 
-		var combinedArrays = [studentID,selectedStrengths,selectedDifficulties];
-		var xhr = new XMLHttpRequest();
-    	xhr.open('POST', 'example.php', true);
-    	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    	xhr.onreadystatechange = function() {
-			if (xhr.readyState === 4 && xhr.status === 200) {
-				console.log(xhr.responseText);
-			}
-    	};
-    	xhr.send(JSON.stringify({ arrays: combinedArrays }));
-	})
-	
-	
-    // var combinedArrays = [array1, array2];
-
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', 'generate_pdf.php', true);
-    // xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    // xhr.onreadystatechange = function() {
-    //     if (xhr.readyState === 4 && xhr.status === 200) {
-    //         console.log(xhr.responseText);
-    //     }
-    // };
-    // xhr.send(JSON.stringify({ arrays: combinedArrays }));
+	// 	var combinedArrays = [studentID,selectedStrengths,selectedDifficulties];
+	// 	var xhr = new XMLHttpRequest();
+    // 	xhr.open('POST', 'example.php', true);
+    // 	xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    // 	xhr.onreadystatechange = function() {
+	// 		if (xhr.readyState === 4 && xhr.status === 200) {
+	// 			console.log(xhr.responseText);
+	// 		}
+    // 	};
+    // 	xhr.send(JSON.stringify({ arrays: combinedArrays }));
+	// })
 </script>
 

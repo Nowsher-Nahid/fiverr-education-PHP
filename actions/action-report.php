@@ -123,17 +123,14 @@ if(isset($_POST['reportStudentID']) && $_POST["reportStudentID"]!=""){
         'actions_1'=>$reportActions,
         'actions_2'=>$reportActionsb,
         'compensations'=>$reportCompensations,
-
         'teacher_1'=>$reportTeacherOne,
         'members_1'=>$reportTeachersOne,
         'duties_1'=>$reportDutiesOne,
         'outcomes_1'=>$reportOutcomesOne,
-
         'teacher_2'=>$reportTeacherTwo,
         'members_2'=>$reportTeachersTwo,
         'duties_2'=>$reportDutiesTwo,
         'outcomes_2'=>$reportOutcomesTwo,
-
         'evaluation_date'=>$reportEvaluateDate,
         'created_at'=>$creationDate,
         'created_by'=>$createdBy

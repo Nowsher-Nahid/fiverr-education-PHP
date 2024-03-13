@@ -24,8 +24,8 @@ $(document).on("click", ".remove-option-btn", function () {
 
 // Update the selected options list
 function updateSelectedDifficultiesList() {
-$("#selectedDifficultiesList").empty();
-for (var i = 0; i < selectedDifficulties.length; i++) {
-    $("#selectedDifficultiesList").append("<li>" + selectedDifficulties[i] + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
-}
+    $("#selectedDifficultiesList").empty();
+    for (var i = 0; i < selectedDifficulties.length; i++) {
+        $("#selectedDifficultiesList").append("<li>" + selectedDifficulties[i] + " <i class='fas fa-trash text-danger ml-2 remove-option-btn'></i></li>");
+    }
 }

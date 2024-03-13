@@ -188,5 +188,66 @@ $(document).ready(function () {
       $(".step[data-step='5']").removeClass('active').hide();
       $(".step[data-step='4']").addClass('active').show();
     })
+
+
+
+  // EDIT 
+  // ONE : Teachers -------------------------------------------------------------------------------------------
+  $('.edit-one-next').click(function(){
+    if(selectedOptions.length === 0){
+      Swal.fire("Error!", "Please select or enter teachers!", "error");
+    }else{
+      $(".step[data-step='1']").removeClass('active').hide();
+      $(".step[data-step='2']").addClass('active').show();
+    }
+  })
+
+  // TWO : Task Assignment -------------------------------------------------------------------------------------------
+  $('.edit-two-next').click(function(){
+    if($('.task-box').find('.remove-btn').length === 0){
+      Swal.fire("Error!", "Please assign tasks to the teachers!", "error");
+    }else{
+      $(".step[data-step='2']").removeClass('active').hide();
+      $(".step[data-step='3']").addClass('active').show();
+    }
+  })
+  $('.edit-two-prev').click(function(){
+    $(".step[data-step='2']").removeClass('active').hide();
+    $(".step[data-step='1']").addClass('active').show();
+  })
+
+  // THREE : Goals -------------------------------------------------------------------------------------------
+  $('.edit-three-next').click(function(){
+    if(selectedGoals.length === 0){
+      Swal.fire("Error!", "Please select or enter goals!", "error");
+    }else{
+      $(".step[data-step='3']").removeClass('active').hide();
+      $(".step[data-step='4']").addClass('active').show();
+    }
+  })
+  $('.edit-three-prev').click(function(){
+    $(".step[data-step='3']").removeClass('active').hide();
+    $(".step[data-step='2']").addClass('active').show();
+  })
+
+  // FOUR : Actions  -------------------------------------------------------------------------------------------
+  $('.edit-four-next').click(function(){
+    if(selectedActions.length === 0){
+      Swal.fire("Error!", "Please select or enter actions!", "error");
+    }else{
+      $(".step[data-step='4']").removeClass('active').hide();
+      $(".step[data-step='5']").addClass('active').show();
+    }
+  })
+  $('.edit-four-prev').click(function(){
+    $(".step[data-step='4']").removeClass('active').hide();
+    $(".step[data-step='3']").addClass('active').show();
+  })
+
+  // FIVE : REPORT -------------------------------------------------------------------------------------------
+  $('.edit-five-prev').click(function(){
+    $(".step[data-step='5']").removeClass('active').hide();
+    $(".step[data-step='4']").addClass('active').show();
+  })
   
   }); 

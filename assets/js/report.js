@@ -297,28 +297,20 @@ $(document).ready(function(){
     });
 
 
-    
     var selectedEvaluateDate = [];
     // Add Option button click event
     $("#addEvaluateDate").click(function () {
-        // var addedOutcome = $("#addedOutcome").val();
         var evaluationDate = $("#evaluationDate").val();
-        if(evaluationDate == ""){
-            Swal.fire("Warning!", "Please, set a re-evaluation date!", "error");
-        }else{
-            if (evaluationDate && !selectedEvaluateDate.includes(evaluationDate)) {
+        if (evaluationDate && !selectedEvaluateDate.includes(evaluationDate)) {
+            if(selectedEvaluateDate.length > 0){
+                Swal.fire("Warning!", "More than one date can't be added!", "error");
+            }else{
                 selectedEvaluateDate.push(evaluationDate);
                 updateSelectedEvaluateList();
             }
-
-            // if (addedOutcome && !selectedOutcomes.includes(addedOutcome+' (Date: '+evaluationDate+')')) {
-            //     selectedOutcomes.push(addedOutcome+' (Date: '+evaluationDate+')');
-            //     updateSelectedEvaluateList();
-            // }else{
-            //     Swal.fire("Warning!", "This outcome is already added!", "error");
-            // }
+        }else{
+            Swal.fire("Warning!", "This date is already added!", "error");
         }
-        // $('#addedOutcome').val('');
         $('#evaluationDate').val('');
     });
 

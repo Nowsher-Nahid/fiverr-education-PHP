@@ -13,6 +13,8 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
     $get_user = $crudObj->select_record('vd_user_sex,vd_user_1_name,vd_user_2_name',$where_user,'vd_user');
     $full_name = $get_user[0]['vd_user_1_name'].' '.$get_user[0]['vd_user_2_name'];
 
+    $teachers = json_decode($report_data[0]['teachers']);
+
     $strengths = json_decode($report_data[0]['strengths']);
     $str_strengths = "";
     foreach($strengths as $strength){
@@ -32,6 +34,8 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
     if($array_support_2 != ""){
         $array_support_2 = json_decode($report_data[0]['support_2']);
         $support_2 = $array_support_2[0];
+    }else{
+        $support_2 = "";
     }
 
     $goals_1 = $report_data[0]['goals_1'];
@@ -50,6 +54,28 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
         foreach($goals_2 as $goal){
             $str_goals_2 .= $goal.'.';
         }
+    }else{
+        $str_goals_2 = "";
+    }
+
+    $actions_1 = $report_data[0]['actions_1'];
+    if($actions_1 != ""){
+        $actions_1 = json_decode($actions_1);
+        $str_actions_1 = "";
+        foreach($actions_1 as $action){
+            $str_actions_1 .= $action.'.';
+        }
+    }
+
+    $actions_2 = $report_data[0]['actions_2'];
+    if($actions_2 != ""){
+        $actions_2 = json_decode($actions_2);
+        $str_actions_2 = "";
+        foreach($actions_2 as $action){
+            $str_actions_2 .= $action.'.';
+        }
+    }else{
+        $str_actions_2 = "";
     }
 
     $compensations = $report_data[0]['compensations'];
@@ -69,6 +95,8 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
             $str_teacher_1 .= $data.'.';
         }
         $exp_teacher_1 = explode('##',$str_teacher_1);
+    }else{
+        $str_compensations = "";
     }
 
     $members_1 = $report_data[0]['members_1'];
@@ -107,6 +135,9 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
             $str_teacher_2 .= $data.'.';
         }
         $exp_teacher_2 = explode('##',$str_teacher_2);
+        $exp_teacher_2 = $exp_teacher_2[2];
+    }else{
+        $exp_teacher_2 = "";
     }
 
     $members_2 = $report_data[0]['members_2'];
@@ -117,6 +148,9 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
             $str_members_2 .= $data.'.';
         }
         $exp_members_2 = explode('##',$str_members_2);
+        $exp_members_2 = $exp_members_2[2];
+    }else{
+        $exp_members_2 = "";
     }
 
     $duties_2 = $report_data[0]['duties_2'];
@@ -126,6 +160,8 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
         foreach($duties_2 as $data){
             $str_duties_2 .= $data.'.';
         }
+    }else{
+        $str_duties_2 = "";
     }
 
     $outcomes_2 = $report_data[0]['outcomes_2'];
@@ -135,6 +171,8 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
         foreach($outcomes_2 as $data){
             $str_outcomes_2 .= $data.'.';
         }
+    }else{
+        $str_outcomes_2 = "";
     }
 
     $evaluation_date = $report_data[0]['evaluation_date'];
@@ -252,13 +290,15 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
     $pdf->MultiCell(90, $heightOfColumn2, '1. '.$support_1, 'TRBL', 'L', true);
     
     // ROW 9
-    $x1 = $pdf->GetX();
-    $y1 = $pdf->GetY();
-    $pdf->SetXY($x1 + 90, $y1);
-    $pdf->MultiCell(100, 15, $str_goals_2, 'TRBL', 'L', true);
-    $heightOfColumn2 = $pdf->GetY() - $y1;
-    $pdf->SetXY($x1, $y1);
-    $pdf->MultiCell(90, $heightOfColumn2, '2. '.$support_2, 'TRBL', 'L', true);
+    if($support_2 != ""){
+        $x1 = $pdf->GetX();
+        $y1 = $pdf->GetY();
+        $pdf->SetXY($x1 + 90, $y1);
+        $pdf->MultiCell(100, 15, $str_goals_2, 'TRBL', 'L', true);
+        $heightOfColumn2 = $pdf->GetY() - $y1;
+        $pdf->SetXY($x1, $y1);
+        $pdf->MultiCell(90, $heightOfColumn2, '2. '.$support_2, 'TRBL', 'L', true);
+    }
     
     // ROW 10
     $x1 = $pdf->GetX();
@@ -271,13 +311,15 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
     $x1 = $pdf->GetX();
     $y1 = $pdf->GetY();
     $pdf->SetXY($x1, $y1);
-    $pdf->MultiCell(190, 15, "1. Action 1", 'TRBL', 'L', true);
-    
+    $pdf->MultiCell(190, 15, "1. $str_actions_1", 'TRBL', 'L', true);
+
     // ROW 12
-    $x1 = $pdf->GetX();
-    $y1 = $pdf->GetY();
-    $pdf->SetXY($x1, $y1);
-    $pdf->MultiCell(190, 15, "2. Action 2", 'TRBL', 'L', true);
+    if($str_actions_2 != ""){
+        $x1 = $pdf->GetX();
+        $y1 = $pdf->GetY();
+        $pdf->SetXY($x1, $y1);
+        $pdf->MultiCell(190, 15, "2. $str_actions_2", 'TRBL', 'L', true);
+    }   
     
     
     // ROW 13
@@ -287,10 +329,12 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
     $pdf->MultiCell(190, 7, "Formen des Nachteilsausgleichs", 'TRBL', 'L', true);
     
     // ROW 14
-    $x1 = $pdf->GetX();
-    $y1 = $pdf->GetY();
-    $pdf->SetXY($x1, $y1-.5);
-    $pdf->MultiCell(190, 15, $str_compensations, 'TRBL', 'L', true);
+    if($str_compensations != ""){
+        $x1 = $pdf->GetX();
+        $y1 = $pdf->GetY();
+        $pdf->SetXY($x1, $y1-.5);
+        $pdf->MultiCell(190, 15, $str_compensations, 'TRBL', 'L', true);
+    }
     
     // ROW 15
     $x1 = $pdf->GetX();
@@ -301,9 +345,9 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
     // Sample data (you can replace this with your actual data)
     $data = array(
         array('', 'Fördermaßnahme 1', 'Fördermaßnahme 2', 'Nachteilsausgleich'),
-        array('Wer?', $exp_teacher_1[2], $exp_teacher_2[2], ''),
+        array('Wer?', $exp_teacher_1[2], $exp_teacher_2, ''),
         array('Was?', $str_duties_1, $str_duties_2, ''),
-        array('Mit wem?', $exp_members_1[2], $exp_members_2[2], ''),
+        array('Mit wem?', $exp_members_1[2], $exp_members_2, ''),
         array('Bis wann? & Feedback', $str_outcomes_1, $str_outcomes_2, ''),
         // array('Feedback / Kontrolle', 'Outcome 1', 'Outcome 2', ''),
     );
@@ -430,18 +474,21 @@ if (isset($_POST["id"]) && $_POST["id"]!="") {
     // Output the content
     // echo $icsContent;
 
-
-    // SEND EMAIL --------------------------------------------------------------------------------------------
-    $receiver_email = "nowshern4@gmail.com";
-    $receiver_name = "Nowsher Nahid";
-    $subject = "testing pdf sent";
-    $messagebody = "Welcome to the email";
-    $reply_to = "";
-    $reply_to_name = "";
-    $filename_pdf = "../assets/pdf/sample.pdf";
-    $filename_ics = "../assets/pdf/sample.ics";
-    $crudObj->send_mail($receiver_email,$receiver_name,$subject,$messagebody,$reply_to,$reply_to_name,$filename_pdf,$filename_ics);
-    
+    foreach($teachers as $data){
+        $exp_teacher = explode('##',$data);
+        $teacher_name = $exp_teacher[2];
+        $teacher_email = $exp_teacher[2];
+        // SEND EMAIL --------------------------------------------------------------------------------------------
+        $receiver_email = "nowshern4@gmail.com";
+        $receiver_name = "Nowsher Nahid";
+        $subject = "testing pdf sent";
+        $messagebody = "Welcome to the email";
+        $reply_to = "";
+        $reply_to_name = "";
+        $filename_pdf = "../assets/pdf/sample.pdf";
+        $filename_ics = "../assets/pdf/sample.ics";
+        $crudObj->send_mail($receiver_email,$receiver_name,$subject,$messagebody,$reply_to,$reply_to_name,$filename_pdf,$filename_ics);
+    }
     $response = array(true);
     echo json_encode($response);
 }
